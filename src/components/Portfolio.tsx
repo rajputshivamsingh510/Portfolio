@@ -1044,9 +1044,9 @@ const Portfolio = () => {
 
               <div className="space-y-4">
                 {[
-                  { icon: <Mail size={20} />, text: 'john.doe@email.com' },
-                  { icon: <MapPin size={20} />, text: 'San Francisco, CA' },
-                  { icon: <Linkedin size={20} />, text: '/in/johndoe' }
+                  { icon: <Mail size={20} />, text: 'rajputshivamsingh510@gmail.com' },
+                  { icon: <MapPin size={20} />, text: 'Punjab, IND' },
+                  { icon: <Linkedin size={20} />, text: 'in/shivam-singh-243000232/' }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -1067,9 +1067,9 @@ const Portfolio = () => {
 
               <div className="flex space-x-4">
                 {[
-                  { icon: <Github size={24} />, href: 'https://github.com' },
-                  { icon: <Linkedin size={24} />, href: 'https://linkedin.com' },
-                  { icon: <Mail size={24} />, href: 'mailto:john.doe@email.com' }
+                  { icon: <Github size={24} />, href: 'https://https://github.com/rajputshivamsingh510' },
+                  { icon: <Linkedin size={24} />, href: 'https://www.linkedin.com/in/shivam-singh-243000232/' },
+                  { icon: <Mail size={24} />, href: 'mailto:rajputshivamsingh510@gmail.com' }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
@@ -1176,7 +1176,7 @@ const Portfolio = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            © 2025 John Doe. All rights reserved.
+            © 2025 Shivam Singh. All rights reserved.
           </p>
           
           <motion.button
