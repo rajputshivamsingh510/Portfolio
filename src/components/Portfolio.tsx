@@ -1067,7 +1067,7 @@ const Portfolio = () => {
 
               <div className="flex space-x-4">
                 {[
-                  { icon: <Github size={24} />, href: 'https://https://github.com/rajputshivamsingh510' },
+                  { icon: <Github size={24} />, href: 'https://github.com/rajputshivamsingh510' },
                   { icon: <Linkedin size={24} />, href: 'https://www.linkedin.com/in/shivam-singh-243000232/' },
                   { icon: <Mail size={24} />, href: 'mailto:rajputshivamsingh510@gmail.com' }
                 ].map((social, index) => (
