@@ -257,7 +257,7 @@ const Portfolio = () => {
             }`}
             whileHover={{ scale: 1.05 }}
           >
-            AI/ML Portfolio
+            Portfolio
           </motion.div>
           
           <div className="hidden md:flex space-x-8">
@@ -457,9 +457,10 @@ const Portfolio = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              I'm a passionate AI/ML Engineer with 3+ years of experience in developing intelligent solutions 
-              that bridge the gap between complex data and actionable insights. My expertise spans across 
-              machine learning, deep learning, natural language processing, and cloud deployment.
+              I am a passionate AI/ML Engineer and Data Scientist with hands-on experience in
+              building predictive models, NLP chatbots, and automated data workflows. Skilled 
+              in Python, Machine Learning, Deep Learning, and Data Visualization, I enjoy 
+              solving complex problems and transforming raw data into actionable insights.
             </motion.p>
 
             <motion.p
@@ -470,19 +471,21 @@ const Portfolio = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              I specialize in transforming raw data into powerful AI models that solve real-world problems. 
-              From predictive analytics to computer vision applications, I love crafting solutions that make 
-              a meaningful impact.
+              Currently, I am enhancing my expertise with Google Advanced Data Analytics and
+              Microsoft Power BI certifications, while working on real-world projects like stock
+              market prediction, customer churn analysis, and wallet risk scoring.
             </motion.p>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
               {[
-                'Python & R',
+                'Python',
                 'TensorFlow & PyTorch',
-                'AWS & GCP',
+                'Java',
                 'SQL & NoSQL',
                 'Docker & Kubernetes',
-                'Data Visualization'
+                'Data Visualization',
+                'Machine Learning',
+                'Deep Learning'
               ].map((skill, index) => (
                 <motion.div
                   key={skill}
