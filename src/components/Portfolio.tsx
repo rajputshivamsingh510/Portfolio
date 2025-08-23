@@ -523,8 +523,8 @@ const Portfolio = () => {
         icon: <Code size={24} />,
         skills: [
           { name: 'Python', level: 95 },
-          { name: 'R', level: 85 },
-          { name: 'JavaScript', level: 80 },
+          { name: 'Java', level: 80 },
+          { name: 'HTML-CSS', level: 80 },
           { name: 'SQL', level: 90 }
         ]
       },
@@ -544,18 +544,15 @@ const Portfolio = () => {
         skills: [
           { name: 'Pandas', level: 95 },
           { name: 'NumPy', level: 90 },
-          { name: 'Tableau', level: 80 },
-          { name: 'Apache Spark', level: 75 }
+          { name: 'Matplotlib', level: 80 },
+          { name: 'Power BI', level: 78 }
         ]
       },
       {
         title: 'Cloud & Deployment',
         icon: <Cloud size={24} />,
         skills: [
-          { name: 'AWS', level: 85 },
-          { name: 'GCP', level: 80 },
-          { name: 'Docker', level: 85 },
-          { name: 'Kubernetes', level: 75 }
+
         ]
       }
     ];
