@@ -438,7 +438,7 @@ const Portfolio = () => {
                 darkMode ? 'bg-gray-700' : 'bg-gray-200'
               }`}>
                 <img 
-                  src="public\my_pic.jpg" 
+                  src="public/my_pic.jpg" 
                   alt="My Portrait" 
                   className="w-full h-full object-cover rounded-2xl"
                 />
