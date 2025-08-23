@@ -434,11 +434,16 @@ const Portfolio = () => {
               <div className={`absolute inset-0 rounded-2xl ${
                 darkMode ? 'bg-gradient-to-r from-blue-500 to-purple-500' : 'bg-gradient-to-r from-blue-400 to-purple-400'
               } opacity-20 blur-xl`} />
-              <div className={`relative w-full h-full rounded-2xl ${
+              <div className={`relative w-full h-full rounded-2xl overflow-hidden ${
                 darkMode ? 'bg-gray-700' : 'bg-gray-200'
-              } flex items-center justify-center`}>
-                <User size={120} className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
+              }`}>
+                <img 
+                  src="public\my_pic.jpg" 
+                  alt="My Portrait" 
+                  className="w-full h-full object-cover rounded-2xl"
+                />
               </div>
+
             </motion.div>
           </motion.div>
 
