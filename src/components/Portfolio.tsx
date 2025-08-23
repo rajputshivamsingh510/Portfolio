@@ -805,9 +805,6 @@ const Portfolio = () => {
               </motion.div>
             ))}
           </div>
-          <div className="mt-10">
-            <SkillsRadar />
-          </div>
         </div>
       </section>
     );
@@ -924,9 +921,6 @@ const Portfolio = () => {
               </motion.div>
             ))}
           </div>
-          <div className="mt-10">
-            <SkillsRadar />
-          </div>
         </div>
       </section>
     );
@@ -996,9 +990,6 @@ const Portfolio = () => {
                 </p>
               </motion.div>
             ))}
-          </div>
-          <div className="mt-10">
-            <SkillsRadar />
           </div>
         </div>
       </section>
@@ -1173,9 +1164,6 @@ const Portfolio = () => {
                 <span>Send Message</span>
               </motion.button>
             </motion.form>
-          </div>
-          <div className="mt-10">
-            <SkillsRadar />
           </div>
         </div>
       </section>
