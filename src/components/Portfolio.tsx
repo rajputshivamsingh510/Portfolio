@@ -635,10 +635,10 @@ const Portfolio = () => {
                           }}
                         />
                       </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
           <div className="mt-10">
@@ -774,14 +774,14 @@ const Portfolio = () => {
                         {tech}
                       </span>
                     ))}
-                </div>
+                  </div>
 
-                <div className="flex space-x-3">
-                  <motion.a
-                    href={project.github}
-                    className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
-                      darkMode 
-                        ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                  <div className="flex space-x-3">
+                    <motion.a
+                      href={project.github}
+                      className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
+                        darkMode 
+                          ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
                           : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                       }`}
                       whileHover={{ scale: 1.05 }}
@@ -1072,9 +1072,9 @@ const Portfolio = () => {
                     </span>
                   </motion.div>
                 ))}
-            </div>
+              </div>
 
-            <div className="flex space-x-4">
+              <div className="flex space-x-4">
                 {[
                   { icon: <Github size={24} />, href: 'https://github.com' },
                   { icon: <Linkedin size={24} />, href: 'https://linkedin.com' },
