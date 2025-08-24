@@ -1158,11 +1158,30 @@ const Portfolio = () => {
 
   // Contact Section
   const ContactSection = () => {
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
-      alert('Message sent! (This is a demo)');
-      setFormData({ name: '', email: '', message: '' });
+    
+      try {
+        const response = await fetch('https://portfolio-backend-jxnj.onrender.com/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        if (response.ok) {
+          alert('Message sent successfully!');
+          setFormData({ name: '', email: '', message: '' });
+        } else {
+          alert('Failed to send message. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('An error occurred. Please try again.');
+      }
     };
+
 
     return (
       <section
