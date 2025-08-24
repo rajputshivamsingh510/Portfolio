@@ -549,10 +549,11 @@ const Portfolio = () => {
         ]
       },
       {
-        title: 'Cloud & Deployment',
-        icon: <Cloud size={24} />,
+        title: 'Core Skills',
+        icon: <Code size={24} />,
         skills: [
-
+          { name: 'DSA', level: 88 },
+          { name: 'OOPS', level: 95 },
         ]
       }
     ];
