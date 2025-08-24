@@ -675,13 +675,17 @@ const Portfolio = () => {
     );
   };
 
-  // Projects Section
+// Projects Section
   const ProjectsSection = () => {
+    const [activeFilter, setActiveFilter] = useState('All');
+    const [visibleProjects, setVisibleProjects] = useState(6);
+    
     const projects = [
       {
         title: 'Portfolio Website',
         description: 'Personal portfolio showcasing projects and skills built with React, Framer Motion, and Tailwind CSS.',
         tech: ['React', 'Framer Motion', 'Tailwind CSS', 'Vercel'],
+        category: 'Frontend',
         image: '🌐',
         github: 'https://github.com/rajputshivamsingh510/Wallet-Risk-Analyzer',
       },
@@ -689,6 +693,7 @@ const Portfolio = () => {
         title: 'PDF Content Analysis & Q-Gen',
         description: 'Analyzes PDFs and auto-generates questions via NLP.',
         tech: ['Python', 'NLP', 'question-generation'],
+        category: 'AI/ML',
         image: '📑',
         github: 'https://github.com/rajputshivamsingh510/PDF-Content-Analysis-and-Question-Generation',
       },
@@ -696,6 +701,7 @@ const Portfolio = () => {
         title: 'Credit Score Analysis',
         description: 'Performs credit scoring on financial data with exploratory data analysis.',
         tech: ['Python', 'EDA', 'scikit-learn'],
+        category: 'Data Science',
         image: '💳',
         github: 'https://github.com/rajputshivamsingh510/Credit_Score_Analysis',
       },
@@ -703,6 +709,7 @@ const Portfolio = () => {
         title: 'E-commerce Demo',
         description: 'HTML based e-commerce front-end showcasing product listings & layout.',
         tech: ['HTML', 'CSS', 'JavaScript'],
+        category: 'Frontend',
         image: '🛒',
         github: 'https://github.com/rajputshivamsingh510/e-commerce-',
       },
@@ -710,6 +717,7 @@ const Portfolio = () => {
         title: 'Flickyfy',
         description: 'JavaScript mini-project creating fun Flicky animations.',
         tech: ['JavaScript'],
+        category: 'Frontend',
         image: '🎨',
         github: 'https://github.com/rajputshivamsingh510/Flickyfy',
       },
@@ -717,6 +725,7 @@ const Portfolio = () => {
         title: 'Cruptocreek',
         description: 'Interactive cryptocurrency UI built with HTML and JS.',
         tech: ['HTML', 'JavaScript'],
+        category: 'Frontend',
         image: '💲',
         github: 'https://github.com/rajputshivamsingh510/Cruptocreek',
       },
@@ -724,27 +733,31 @@ const Portfolio = () => {
         title: 'Stock Prediction Model',
         description: 'Forecasts stock prices using machine learning algorithms.',
         tech: ['Python', 'ML', 'Time Series'],
+        category: 'AI/ML',
         image: '📈',
         github: 'https://github.com/rajputshivamsingh510/Stock-prediction-ML-model',
       },
       {
         title: 'Twitter Sentiment Analysis',
-        description: 'Classifies tweet sentiment (Positive/Neutral/Negative) using TF-IDF and ML models, deployed via Streamlit.',
+        description: 'Classifies tweet sentiment using TF-IDF and ML models, deployed via Streamlit.',
         tech: ['Python', 'NLP', 'scikit-learn', 'Streamlit'],
+        category: 'AI/ML',
         image: '🐦',
         github: 'https://github.com/rajputshivamsingh510/Twitter-Sentiment-Analysis',
       },
       {
         title: 'Weather Forecasting (LSTM)',
-        description: 'Spatio-temporal LSTM deep learning model forecasted weather based on historical data.',
+        description: 'Spatio-temporal LSTM deep learning model for weather forecasting.',
         tech: ['Python', 'TensorFlow', 'LSTM', 'Time Series'],
+        category: 'AI/ML',
         image: '☁️',
         github: 'https://github.com/rajputshivamsingh510/Weather-Forcasting-using-Spatio-Temporal',
       },
       {
-        title: 'Smart Traffic Management (U-Net)',
+        title: 'Smart Traffic Management',
         description: 'Computer vision solution using U-Net3 for traffic analysis and management.',
         tech: ['Python', 'U-Net', 'Segmentation', 'CV'],
+        category: 'AI/ML',
         image: '🚦',
         github: 'https://github.com/rajputshivamsingh510/Smart-traffic-management-system-using-Unet3-',
       },
@@ -752,6 +765,7 @@ const Portfolio = () => {
         title: 'YouTube Transcript Extractor',
         description: 'Automated extraction of YouTube video transcripts to Excel using Selenium.',
         tech: ['Python', 'Selenium', 'pandas'],
+        category: 'Automation',
         image: '📄',
         github: 'https://github.com/rajputshivamsingh510/YouTube-Transcript-Extraction-Tool',
       },
@@ -759,6 +773,7 @@ const Portfolio = () => {
         title: 'LinkedIn Outreach Automation',
         description: 'Automates LinkedIn profile messaging workflow.',
         tech: ['Python', 'Automation', 'Selenium'],
+        category: 'Automation',
         image: '🔗',
         github: 'https://github.com/rajputshivamsingh510/LinkedIn-Profile-Outreach-Automation',
       },
@@ -766,6 +781,7 @@ const Portfolio = () => {
         title: 'House Price Prediction',
         description: 'Predicts real estate prices via regression with data cleaning and model evaluation.',
         tech: ['Python', 'Regression', 'pandas', 'scikit-learn'],
+        category: 'Data Science',
         image: '🏠',
         github: 'https://github.com/rajputshivamsingh510/House-Price-Prediction',
       },
@@ -773,6 +789,7 @@ const Portfolio = () => {
         title: 'Student Marks Predictor',
         description: 'Predicts student exam scores based on study hours using regression techniques.',
         tech: ['Python', 'Regression', 'KNN', 'scikit-learn'],
+        category: 'Data Science',
         image: '📚',
         github: 'https://github.com/rajputshivamsingh510/Student-Marks-Predictor',
       },
@@ -780,6 +797,7 @@ const Portfolio = () => {
         title: 'Cross-Camera Player Mapping',
         description: 'Mapped player movements across multiple camera feeds (multi-view tracking).',
         tech: ['Python', 'CV', 'Tracking'],
+        category: 'AI/ML',
         image: '🎥',
         github: 'https://github.com/rajputshivamsingh510/Cross_Camera_Player_Mapping',
       },
@@ -787,10 +805,16 @@ const Portfolio = () => {
         title: 'Wallet Risk Analyzer',
         description: 'Scores Ethereum wallets by DeFi risk using clustering and ML models based on Moralis data.',
         tech: ['Python', 'ML', 'Clustering', 'Random Forest', 'Moralis API'],
+        category: 'AI/ML',
         image: '💳',
         github: 'https://github.com/rajputshivamsingh510/Wallet-Risk-Analyzer'
       }    
     ];
+
+    const categories = ['All', 'AI/ML', 'Data Science', 'Frontend', 'Automation'];
+    const filteredProjects = activeFilter === 'All' 
+      ? projects 
+      : projects.filter(project => project.category === activeFilter);
 
     return (
       <section
@@ -810,109 +834,134 @@ const Portfolio = () => {
             Featured Projects
           </motion.h2>
 
-          <div className="mb-8">
-            <ProjectFilter projects={projects} />
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap justify-center mb-12 gap-2">
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                onClick={() => {
+                  setActiveFilter(category);
+                  setVisibleProjects(6);
+                }}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeFilter === category
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : darkMode
+                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {category}
+              </motion.button>
+            ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {filteredProjects.slice(0, visibleProjects).map((project, index) => (
               <motion.div
                 key={project.title}
-                className={`rounded-xl ${
+                className={`group relative rounded-xl ${
                   darkMode
                     ? 'bg-gray-900 border border-gray-700'
                     : 'bg-white border border-gray-200'
-                } shadow-lg overflow-hidden`}
+                } shadow-lg overflow-hidden h-80`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  rotateY: 5,
-                  boxShadow: darkMode
-                    ? '0 25px 50px rgba(59, 130, 246, 0.2)'
-                    : '0 25px 50px rgba(0, 0, 0, 0.15)',
-                }}
+                whileHover={{ y: -8 }}
               >
-                <div
-                  className={`p-6 text-center ${
-                    darkMode
-                      ? 'bg-gradient-to-br from-blue-600 to-purple-600'
-                      : 'bg-gradient-to-br from-blue-500 to-purple-500'
-                  }`}
-                >
-                  <div className="text-6xl mb-4">{project.image}</div>
+                {/* Project Icon/Image */}
+                <div className={`h-32 flex items-center justify-center ${
+                  darkMode
+                    ? 'bg-gradient-to-br from-blue-600 to-purple-600'
+                    : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                }`}>
+                  <div className="text-4xl">{project.image}</div>
                 </div>
 
-                <div className="p-6">
-                  <h3
-                    className={`text-xl font-bold mb-3 ${
+                {/* Project Content */}
+                <div className="p-4 h-48 flex flex-col justify-between">
+                  <div>
+                    <h3 className={`font-bold text-lg mb-2 line-clamp-1 ${
                       darkMode ? 'text-white' : 'text-gray-900'
-                    }`}
-                  >
-                    {project.title}
-                  </h3>
+                    }`}>
+                      {project.title}
+                    </h3>
 
-                  <p
-                    className={`text-sm mb-4 ${
+                    <p className={`text-sm mb-3 line-clamp-2 ${
                       darkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}
+                    }`}>
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {project.tech.slice(0, 3).map((tech) => (
+                        <span
+                          key={tech}
+                          className={`px-2 py-1 text-xs rounded-full ${
+                            darkMode
+                              ? 'bg-blue-600/20 text-blue-400'
+                              : 'bg-blue-100 text-blue-800'
+                          }`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.tech.length > 3 && (
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-600'
+                        }`}>
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center space-x-2 py-2 rounded-lg transition-all duration-300 ${
+                      darkMode
+                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    } group-hover:bg-blue-600 group-hover:text-white`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className={`px-3 py-1 text-xs rounded-full ${
-                          darkMode
-                            ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30'
-                            : 'bg-blue-100 text-blue-800 border border-blue-200'
-                        }`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex space-x-3">
-                    <motion.a
-                      href={project.github}
-                      className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
-                        darkMode
-                          ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                      }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Github size={16} />
-                      <span className="text-sm">Code</span>
-                    </motion.a>
-
-                    {project.demo && (
-                      <motion.a
-                        href={project.demo}
-                        className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <ExternalLink size={16} />
-                        <span className="text-sm">Demo</span>
-                      </motion.a>
-                    )}
-                  </div>
+                    <Github size={16} />
+                    <span className="text-sm">View Code</span>
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Load More Button */}
+          {visibleProjects < filteredProjects.length && (
+            <div className="text-center">
+              <motion.button
+                onClick={() => setVisibleProjects(prev => prev + 6)}
+                className={`px-8 py-3 rounded-lg font-medium ${
+                  darkMode
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                } transition-colors duration-300`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Load More Projects ({filteredProjects.length - visibleProjects} remaining)
+              </motion.button>
+            </div>
+          )}
         </div>
       </section>
     );
   };
-
   // Experience Section
   const ExperienceSection = () => {
     const experiences = [
@@ -1044,48 +1093,49 @@ const Portfolio = () => {
     );
   };
 
-  // Certificates Section
+// Certificates Section
   const CertificatesSection = () => {
     const [selectedCert, setSelectedCert] = useState(null);
+    const [activeTab, setActiveTab] = useState('Programming & Development');
     
     const certificateData = {
-        'Data Science': [
-          { title: 'Automate Cybersecurity Tasks with Python', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf' },
-          { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf' },
-          { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf' },
-          { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf' },
-          { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf' },
-          { title: 'Lloyds Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf' },
-          { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf' },
-          { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf' },
-        ],
+      'Programming & Development': [
+        { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf', icon: '🐍' },
+        { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf', icon: '☕' },
+        { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf', icon: '🎨' },
+        { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf', icon: '⚛️' },
+        { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf', icon: '🧮' },
+      ],
       
-        'Data Science Certificates': [
-          { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf' },
-          { title: 'Data Analyst Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf' },
-          { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf' },
-          { title: 'Data Scientist Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf' },
-          { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf' },
-          { title: 'Databases and SQL for Data Science with Python', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf' },
-          { title: 'Generative AI: Elevate Your Data Science Career', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf' },
-          { title: 'Generative AI: Enhance your Data Analytics Career', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf' },
-          { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf' },
-          { title: 'IBM Design Certificate', year: '2025', file: '/certificates/certificate/IBM-Design-20250204-28-os1011.pdf' },
-          { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf' },
-          { title: 'Python for Data Science, AI & Development', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf' },
-          { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf' },
-        ],
-      
-        'Power BI': [
-          { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf' },
-          { title: 'Data Analysis and Visualization using Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf' },
-          { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf' },
-          { title: 'Deploy and Maintain Power BI Assets and Capstone Project', year: '2025', file: '/certificates/PowerBI/Deploy-and-Maintain-Power-BI-Assets-and-Capstone-Project.pdf' },
-          { title: 'Extract, Transform and Load Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf' },
-          { title: 'Harnessing the Power of Data with Power BI', year: '2025', file: '/certificates/PowerBI/Harnessing-the-Power-of-Data-with-Power-BI.pdf' },
-          { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf' },
-          { title: 'Preparing Data for Analysis with Microsoft Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf' },
-        ]
+      'Data Science & AI': [
+        { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf', icon: '📊' },
+        { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf', icon: '🔍' },
+        { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
+        { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf', icon: '📈' },
+        { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf', icon: '📉' },
+        { title: 'Databases and SQL for Data Science', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
+        { title: 'Python for Data Science & AI', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
+        { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf', icon: '💼' },
+      ],
+
+      'Power BI & Analytics': [
+        { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
+        { title: 'Data Analysis with Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
+        { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
+        { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
+        { title: 'ETL Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
+        { title: 'Preparing Data with Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
+      ],
+
+      'Cybersecurity & Career': [
+        { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
+        { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf', icon: '💼' },
+        { title: 'Lloyds Banking Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf', icon: '🏦' },
+        { title: 'Data Analyst Career Guide', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
+        { title: 'Data Scientist Career Guide', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
+        { title: 'Generative AI for Data Science', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
+        { title: 'Generative AI for Data Analytics', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
+      ]
     };
 
     return (
@@ -1101,61 +1151,394 @@ const Portfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            Certifications
+            Certifications & Achievements
           </motion.h2>
 
-          {Object.entries(certificateData).map(([category, certs]) => (
-            <div key={category} className="mb-12">
-              <h3 className={`text-2xl font-semibold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                {category}
-              </h3>
-              <div className="flex space-x-6 overflow-x-auto scrollbar-none py-4 px-2">
-                {certs.map((cert, index) => (
-                  <motion.div
-                    key={cert.title}
-                    className={`min-w-[250px] flex-shrink-0 p-6 rounded-xl ${
-                      darkMode ? 'bg-gray-900 border border-gray-700' : 'bg-white border border-gray-200'
-                    } shadow-lg text-center cursor-pointer transition-transform duration-300`}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{
-                      scale: 1.08,
-                      rotateY: 8,
-                      boxShadow: darkMode
-                        ? '0 20px 40px rgba(59, 130, 246, 0.3)'
-                        : '0 20px 40px rgba(0, 0, 0, 0.15)',
-                    }}
-                    onClick={() => setSelectedCert(cert.file)}
-                  >
-                    <div className="text-5xl mb-4">📜</div>
-                    <h4 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {cert.title}
-                    </h4>
-                    <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {cert.year}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          ))}
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center mb-12 gap-2">
+            {Object.keys(certificateData).map((tab) => (
+              <motion.button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeTab === tab
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : darkMode
+                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {tab}
+              </motion.button>
+            ))}
+          </div>
 
+          {/* Certificates Grid */}
+          <motion.div 
+            key={activeTab}
+            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {certificateData[activeTab].map((cert, index) => (
+              <motion.div
+                key={cert.title}
+                className={`group cursor-pointer p-6 rounded-xl ${
+                  darkMode 
+                    ? 'bg-gray-900 border border-gray-700 hover:border-blue-500' 
+                    : 'bg-white border border-gray-200 hover:border-blue-400'
+                } shadow-lg transition-all duration-300 h-48 flex flex-col justify-between`}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -5,
+                  boxShadow: darkMode
+                    ? '0 20px 40px rgba(59, 130, 246, 0.2)'
+                    : '0 20px 40px rgba(0, 0, 0, 0.1)',
+                }}
+                onClick={() => setSelectedCert(cert.file)}
+              >
+                <div className="text-center">
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {cert.icon}
+                  </div>
+                  <h4 className={`font-bold text-sm mb-2 line-clamp-2 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {cert.title}
+                  </h4>
+                </div>
+                
+                <div className="text-center">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                    darkMode 
+                      ? 'bg-blue-600/20 text-blue-400' 
+                      : 'bg-blue-100 text-blue-800'
+                  }`}>
+                    {cert.year}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Certificate Count Display */}
+          <div className="text-center mt-8">
+            <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <span className="font-bold text-blue-500">{certificateData[activeTab].length}</span> certificates in {activeTab}
+            </p>
+          </div>
+
+          {/* Certificate Modal */}
           {selectedCert && (
             <Modal onClose={() => setSelectedCert(null)}>
-              <iframe
-                src={selectedCert}
-                className="w-full h-[80vh]"
-                title="Certificate"
-              ></iframe>
+              <div className="relative">
+                <iframe
+                  src={selectedCert}
+                  className="w-full h-[80vh] rounded-lg"
+                  title="Certificate Viewer"
+                />
+                <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-lg text-sm">
+                  Certificate Preview
+                </div>
+              </div>
             </Modal>
           )}
         </div>
       </section>
     );
-  };
+  };  // Projects Section
+  const ProjectsSection = () => {
+    const [activeFilter, setActiveFilter] = useState('All');
+    const [visibleProjects, setVisibleProjects] = useState(6);
+    
+    const projects = [
+      {
+        title: 'Portfolio Website',
+        description: 'Personal portfolio showcasing projects and skills built with React, Framer Motion, and Tailwind CSS.',
+        tech: ['React', 'Framer Motion', 'Tailwind CSS', 'Vercel'],
+        category: 'Frontend',
+        image: '🌐',
+        github: 'https://github.com/rajputshivamsingh510/Wallet-Risk-Analyzer',
+      },
+      {
+        title: 'PDF Content Analysis & Q-Gen',
+        description: 'Analyzes PDFs and auto-generates questions via NLP.',
+        tech: ['Python', 'NLP', 'question-generation'],
+        category: 'AI/ML',
+        image: '📑',
+        github: 'https://github.com/rajputshivamsingh510/PDF-Content-Analysis-and-Question-Generation',
+      },
+      {
+        title: 'Credit Score Analysis',
+        description: 'Performs credit scoring on financial data with exploratory data analysis.',
+        tech: ['Python', 'EDA', 'scikit-learn'],
+        category: 'Data Science',
+        image: '💳',
+        github: 'https://github.com/rajputshivamsingh510/Credit_Score_Analysis',
+      },
+      {
+        title: 'E-commerce Demo',
+        description: 'HTML based e-commerce front-end showcasing product listings & layout.',
+        tech: ['HTML', 'CSS', 'JavaScript'],
+        category: 'Frontend',
+        image: '🛒',
+        github: 'https://github.com/rajputshivamsingh510/e-commerce-',
+      },
+      {
+        title: 'Flickyfy',
+        description: 'JavaScript mini-project creating fun Flicky animations.',
+        tech: ['JavaScript'],
+        category: 'Frontend',
+        image: '🎨',
+        github: 'https://github.com/rajputshivamsingh510/Flickyfy',
+      },
+      {
+        title: 'Cruptocreek',
+        description: 'Interactive cryptocurrency UI built with HTML and JS.',
+        tech: ['HTML', 'JavaScript'],
+        category: 'Frontend',
+        image: '💲',
+        github: 'https://github.com/rajputshivamsingh510/Cruptocreek',
+      },
+      {
+        title: 'Stock Prediction Model',
+        description: 'Forecasts stock prices using machine learning algorithms.',
+        tech: ['Python', 'ML', 'Time Series'],
+        category: 'AI/ML',
+        image: '📈',
+        github: 'https://github.com/rajputshivamsingh510/Stock-prediction-ML-model',
+      },
+      {
+        title: 'Twitter Sentiment Analysis',
+        description: 'Classifies tweet sentiment using TF-IDF and ML models, deployed via Streamlit.',
+        tech: ['Python', 'NLP', 'scikit-learn', 'Streamlit'],
+        category: 'AI/ML',
+        image: '🐦',
+        github: 'https://github.com/rajputshivamsingh510/Twitter-Sentiment-Analysis',
+      },
+      {
+        title: 'Weather Forecasting (LSTM)',
+        description: 'Spatio-temporal LSTM deep learning model for weather forecasting.',
+        tech: ['Python', 'TensorFlow', 'LSTM', 'Time Series'],
+        category: 'AI/ML',
+        image: '☁️',
+        github: 'https://github.com/rajputshivamsingh510/Weather-Forcasting-using-Spatio-Temporal',
+      },
+      {
+        title: 'Smart Traffic Management',
+        description: 'Computer vision solution using U-Net3 for traffic analysis and management.',
+        tech: ['Python', 'U-Net', 'Segmentation', 'CV'],
+        category: 'AI/ML',
+        image: '🚦',
+        github: 'https://github.com/rajputshivamsingh510/Smart-traffic-management-system-using-Unet3-',
+      },
+      {
+        title: 'YouTube Transcript Extractor',
+        description: 'Automated extraction of YouTube video transcripts to Excel using Selenium.',
+        tech: ['Python', 'Selenium', 'pandas'],
+        category: 'Automation',
+        image: '📄',
+        github: 'https://github.com/rajputshivamsingh510/YouTube-Transcript-Extraction-Tool',
+      },
+      {
+        title: 'LinkedIn Outreach Automation',
+        description: 'Automates LinkedIn profile messaging workflow.',
+        tech: ['Python', 'Automation', 'Selenium'],
+        category: 'Automation',
+        image: '🔗',
+        github: 'https://github.com/rajputshivamsingh510/LinkedIn-Profile-Outreach-Automation',
+      },
+      {
+        title: 'House Price Prediction',
+        description: 'Predicts real estate prices via regression with data cleaning and model evaluation.',
+        tech: ['Python', 'Regression', 'pandas', 'scikit-learn'],
+        category: 'Data Science',
+        image: '🏠',
+        github: 'https://github.com/rajputshivamsingh510/House-Price-Prediction',
+      },
+      {
+        title: 'Student Marks Predictor',
+        description: 'Predicts student exam scores based on study hours using regression techniques.',
+        tech: ['Python', 'Regression', 'KNN', 'scikit-learn'],
+        category: 'Data Science',
+        image: '📚',
+        github: 'https://github.com/rajputshivamsingh510/Student-Marks-Predictor',
+      },
+      {
+        title: 'Cross-Camera Player Mapping',
+        description: 'Mapped player movements across multiple camera feeds (multi-view tracking).',
+        tech: ['Python', 'CV', 'Tracking'],
+        category: 'AI/ML',
+        image: '🎥',
+        github: 'https://github.com/rajputshivamsingh510/Cross_Camera_Player_Mapping',
+      },
+      {
+        title: 'Wallet Risk Analyzer',
+        description: 'Scores Ethereum wallets by DeFi risk using clustering and ML models based on Moralis data.',
+        tech: ['Python', 'ML', 'Clustering', 'Random Forest', 'Moralis API'],
+        category: 'AI/ML',
+        image: '💳',
+        github: 'https://github.com/rajputshivamsingh510/Wallet-Risk-Analyzer'
+      }    
+    ];
 
+    const categories = ['All', 'AI/ML', 'Data Science', 'Frontend', 'Automation'];
+    const filteredProjects = activeFilter === 'All' 
+      ? projects 
+      : projects.filter(project => project.category === activeFilter);
+
+    return (
+      <section
+        ref={projectsRef}
+        id="projects"
+        className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            className={`text-4xl font-bold text-center mb-16 ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Featured Projects
+          </motion.h2>
+
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap justify-center mb-12 gap-2">
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                onClick={() => {
+                  setActiveFilter(category);
+                  setVisibleProjects(6);
+                }}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeFilter === category
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : darkMode
+                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {filteredProjects.slice(0, visibleProjects).map((project, index) => (
+              <motion.div
+                key={project.title}
+                className={`group relative rounded-xl ${
+                  darkMode
+                    ? 'bg-gray-900 border border-gray-700'
+                    : 'bg-white border border-gray-200'
+                } shadow-lg overflow-hidden h-80`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+              >
+                {/* Project Icon/Image */}
+                <div className={`h-32 flex items-center justify-center ${
+                  darkMode
+                    ? 'bg-gradient-to-br from-blue-600 to-purple-600'
+                    : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                }`}>
+                  <div className="text-4xl">{project.image}</div>
+                </div>
+
+                {/* Project Content */}
+                <div className="p-4 h-48 flex flex-col justify-between">
+                  <div>
+                    <h3 className={`font-bold text-lg mb-2 line-clamp-1 ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
+                      {project.title}
+                    </h3>
+
+                    <p className={`text-sm mb-3 line-clamp-2 ${
+                      darkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {project.tech.slice(0, 3).map((tech) => (
+                        <span
+                          key={tech}
+                          className={`px-2 py-1 text-xs rounded-full ${
+                            darkMode
+                              ? 'bg-blue-600/20 text-blue-400'
+                              : 'bg-blue-100 text-blue-800'
+                          }`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.tech.length > 3 && (
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-600'
+                        }`}>
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center space-x-2 py-2 rounded-lg transition-all duration-300 ${
+                      darkMode
+                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    } group-hover:bg-blue-600 group-hover:text-white`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Github size={16} />
+                    <span className="text-sm">View Code</span>
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Load More Button */}
+          {visibleProjects < filteredProjects.length && (
+            <div className="text-center">
+              <motion.button
+                onClick={() => setVisibleProjects(prev => prev + 6)}
+                className={`px-8 py-3 rounded-lg font-medium ${
+                  darkMode
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                } transition-colors duration-300`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Load More Projects ({filteredProjects.length - visibleProjects} remaining)
+              </motion.button>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  };
   // Contact Section
   const ContactSection = () => {
     const [formData, setFormData] = useState({
