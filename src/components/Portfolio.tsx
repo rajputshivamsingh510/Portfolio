@@ -1157,10 +1157,16 @@ const Portfolio = () => {
   };
 
   // Contact Section
-  const ContactSection = () => {
+  const ContactSection = ({ darkMode, contactRef }: ContactSectionProps) => {
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      message: ''
+    });
+  
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
-    
+  
       try {
         const response = await fetch('https://portfolio-backend-jxnj.onrender.com/send-message', {
           method: 'POST',
@@ -1169,7 +1175,7 @@ const Portfolio = () => {
           },
           body: JSON.stringify(formData),
         });
-    
+  
         if (response.ok) {
           alert('Message sent successfully!');
           setFormData({ name: '', email: '', message: '' });
@@ -1181,8 +1187,7 @@ const Portfolio = () => {
         alert('An error occurred. Please try again.');
       }
     };
-
-
+  
     return (
       <section
         ref={contactRef}
@@ -1200,7 +1205,7 @@ const Portfolio = () => {
           >
             Get In Touch
           </motion.h2>
-
+  
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -1220,7 +1225,7 @@ const Portfolio = () => {
                   I'm always excited to work on challenging AI/ML problems and help bring innovative ideas to life.
                 </p>
               </div>
-
+  
               <div className="space-y-4">
                 {[
                   { icon: <Mail size={20} />, text: 'rajputshivamsingh510@gmail.com' },
@@ -1243,7 +1248,7 @@ const Portfolio = () => {
                   </motion.div>
                 ))}
               </div>
-
+  
               <div className="flex space-x-4">
                 {[
                   { icon: <Github size={24} />, href: 'https://github.com/rajputshivamsingh510' },
@@ -1263,7 +1268,7 @@ const Portfolio = () => {
                 ))}
               </div>
             </motion.div>
-
+  
             <motion.form
               onSubmit={handleSubmit}
               className={`space-y-6 p-8 rounded-xl ${
@@ -1292,7 +1297,7 @@ const Portfolio = () => {
                   required
                 />
               </div>
-
+  
               <div>
                 <label className={`block text-sm font-medium mb-2 ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
@@ -1312,7 +1317,7 @@ const Portfolio = () => {
                   required
                 />
               </div>
-
+  
               <div>
                 <label className={`block text-sm font-medium mb-2 ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
@@ -1332,7 +1337,7 @@ const Portfolio = () => {
                   required
                 />
               </div>
-
+  
               <motion.button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center space-x-2"
