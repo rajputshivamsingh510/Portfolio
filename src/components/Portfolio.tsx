@@ -21,7 +21,9 @@ import { 
   ChevronUp,
   Send,
   User,
-  MessageSquare
+  MessageSquare,
+  Cpu,
+  Layers
 } from 'lucide-react';
 import { ModernLoader, LoaderType } from './loaders/LoaderComponents';
 import { LOADER_CONFIG } from './loaders/LoaderConfig';
