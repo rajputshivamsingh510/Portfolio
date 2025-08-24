@@ -653,165 +653,252 @@ const Portfolio = () => {
   };
 
   // Projects Section
-  const ProjectsSection = () => {
-    const projects = [
-      {
-        title: 'AI-Powered Chatbot',
-        description: 'Natural language processing chatbot using transformer models and BERT for customer service automation.',
-        tech: ['Python', 'TensorFlow', 'BERT', 'FastAPI'],
-        image: '🤖',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      },
-      {
-        title: 'Computer Vision Analytics',
-        description: 'Real-time object detection and tracking system for retail analytics using YOLOv5 and OpenCV.',
-        tech: ['Python', 'YOLOv5', 'OpenCV', 'Docker'],
-        image: '👁️',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      },
-      {
-        title: 'Predictive Analytics Dashboard',
-        description: 'Interactive dashboard for sales forecasting using time series analysis and machine learning models.',
-        tech: ['Python', 'Streamlit', 'Prophet', 'Plotly'],
-        image: '📊',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      },
-      {
-        title: 'Recommendation Engine',
-        description: 'Collaborative filtering recommendation system for e-commerce platform with 95% accuracy.',
-        tech: ['Python', 'Scikit-learn', 'Pandas', 'Redis'],
-        image: '🎯',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      },
-      {
-        title: 'Text Sentiment Analyzer',
-        description: 'Deep learning model for social media sentiment analysis with real-time data processing.',
-        tech: ['Python', 'PyTorch', 'Transformers', 'Apache Kafka'],
-        image: '💬',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      },
-      {
-        title: 'MLOps Pipeline',
-        description: 'End-to-end machine learning pipeline with automated training, testing, and deployment.',
-        tech: ['Python', 'MLflow', 'Docker', 'AWS'],
-        image: '⚙️',
-        github: 'https://github.com',
-        demo: 'https://demo.com'
-      }
-    ];
+ import React from 'react';
+import { motion } from 'framer-motion';
+import { Github, ExternalLink } from 'lucide-react';
+import ProjectFilter from './ProjectFilter';
 
-    return (
-      <section
-        ref={projectsRef}
-        id="projects"
-        className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className={`text-4xl font-bold text-center mb-16 ${
-              darkMode ? 'text-white' : 'text-gray-900'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Featured Projects
-          </motion.h2>
+const ProjectsSection = ({ darkMode, projectsRef }) => {
+  const projects = [
+    {
+      title: 'Portfolio Website',
+      description: 'Personal portfolio showcasing projects and skills built with React, Framer Motion, and Tailwind CSS.',
+      tech: ['React', 'Framer Motion', 'Tailwind CSS', 'Vercel'],
+      image: '🌐',
+      github: 'https://github.com/rajputshivamsingh510/Portfolio',
+    },
+    {
+      title: 'Twitter Sentiment Analysis',
+      description: 'Classifies tweet sentiment (Positive/Neutral/Negative) using TF-IDF and ML models, deployed via Streamlit.',
+      tech: ['Python', 'NLP', 'scikit-learn', 'Streamlit'],
+      image: '🐦',
+      github: 'https://github.com/rajputshivamsingh510/Twitter-Sentiment-Analysis',
+    },
+    {
+      title: 'Weather Forecasting (LSTM)',
+      description: 'Spatio-temporal LSTM deep learning model forecasted weather based on historical data.',
+      tech: ['Python', 'TensorFlow', 'LSTM', 'Time Series'],
+      image: '☁️',
+      github: 'https://github.com/rajputshivamsingh510/Weather-Forcasting-using-Spatio-Temporal',
+    },
+    {
+      title: 'Smart Traffic Management (U-Net)',
+      description: 'Computer vision solution using U-Net3 for traffic analysis and management.',
+      tech: ['Python', 'U-Net', 'Segmentation', 'CV'],
+      image: '🚦',
+      github: 'https://github.com/rajputshivamsingh510/Smart-traffic-management-system-using-Unet3-',
+    },
+    {
+      title: 'YouTube Transcript Extractor',
+      description: 'Automated extraction of YouTube video transcripts to Excel using Selenium.',
+      tech: ['Python', 'Selenium', 'pandas'],
+      image: '📄',
+      github: 'https://github.com/rajputshivamsingh510/YouTube-Transcript-Extraction-Tool',
+    },
+    {
+      title: 'LinkedIn Outreach Automation',
+      description: 'Automates LinkedIn profile messaging workflow.',
+      tech: ['Python', 'Automation', 'Selenium'],
+      image: '🔗',
+      github: 'https://github.com/rajputshivamsingh510/LinkedIn-Profile-Outreach-Automation',
+    },
+    {
+      title: 'House Price Prediction',
+      description: 'Predicts real estate prices via regression with data cleaning and model evaluation.',
+      tech: ['Python', 'Regression', 'pandas', 'scikit-learn'],
+      image: '🏠',
+      github: 'https://github.com/rajputshivamsingh510/House-Price-Prediction',
+    },
+    {
+      title: 'Student Marks Predictor',
+      description: 'Predicts student exam scores based on study hours using regression techniques.',
+      tech: ['Python', 'Regression', 'KNN', 'scikit-learn'],
+      image: '📚',
+      github: 'https://github.com/rajputshivamsingh510/Student-Marks-Predictor',
+    },
+    {
+      title: 'Cross-Camera Player Mapping',
+      description: 'Mapped player movements across multiple camera feeds (multi-view tracking).',
+      tech: ['Python', 'CV', 'Tracking'],
+      image: '🎥',
+      github: 'https://github.com/rajputshivamsingh510/Cross_Camera_Player_Mapping',
+    },
+    {
+      title: 'Wallet Risk Analyzer',
+      description: 'Scores Ethereum wallets by DeFi risk using clustering and ML models based on Moralis data.',
+      tech: ['Python', 'ML', 'Clustering', 'Random Forest', 'Moralis API'],
+      image: '💳',
+      github: 'https://github.com/rajputshivamsingh510/Wallet-Risk-Analyzer',
+    },
+    {
+      title: 'PDF Content Analysis & Q-Gen',
+      description: 'Analyzes PDFs and auto-generates questions via NLP.',
+      tech: ['Python', 'NLP', 'question-generation'],
+      image: '📑',
+      github: 'https://github.com/rajputshivamsingh510/PDF-Content-Analysis-and-Question-Generation',
+    },
+    {
+      title: 'Credit Score Analysis',
+      description: 'Performs credit scoring on financial data with exploratory data analysis.',
+      tech: ['Python', 'EDA', 'scikit-learn'],
+      image: '💳',
+      github: 'https://github.com/rajputshivamsingh510/Credit_Score_Analysis',
+    },
+    {
+      title: 'E-commerce Demo',
+      description: 'HTML based e-commerce front-end showcasing product listings & layout.',
+      tech: ['HTML', 'CSS', 'JavaScript'],
+      image: '🛒',
+      github: 'https://github.com/rajputshivamsingh510/e-commerce-',
+    },
+    {
+      title: 'Flickyfy',
+      description: 'JavaScript mini-project creating fun Flicky animations.',
+      tech: ['JavaScript'],
+      image: '🎨',
+      github: 'https://github.com/rajputshivamsingh510/Flickyfy',
+    },
+    {
+      title: 'Cruptocreek',
+      description: 'Interactive cryptocurrency UI built with HTML and JS.',
+      tech: ['HTML', 'JavaScript'],
+      image: '💲',
+      github: 'https://github.com/rajputshivamsingh510/Cruptocreek',
+    },
+    {
+      title: 'Stock Prediction Model',
+      description: 'Forecasts stock prices using machine learning algorithms.',
+      tech: ['Python', 'ML', 'Time Series'],
+      image: '📈',
+      github: 'https://github.com/rajputshivamsingh510/Stock-prediction-ML-model',
+    },
+  ];
 
-          <div className="mb-8">
-            <ProjectFilter projects={projects as any} />
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                className={`rounded-xl ${
-                  darkMode ? 'bg-gray-900 border border-gray-700' : 'bg-white border border-gray-200'
-                } shadow-lg overflow-hidden`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 5,
-                  boxShadow: darkMode 
-                    ? "0 25px 50px rgba(59, 130, 246, 0.2)"
-                    : "0 25px 50px rgba(0, 0, 0, 0.15)"
-                }}
-              >
-                <div className={`p-6 text-center ${
-                  darkMode ? 'bg-gradient-to-br from-blue-600 to-purple-600' : 'bg-gradient-to-br from-blue-500 to-purple-500'
-                }`}>
-                  <div className="text-6xl mb-4">{project.image}</div>
-                </div>
+  return (
+    <section
+      ref={projectsRef}
+      id="projects"
+      className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          className={`text-4xl font-bold text-center mb-16 ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Featured Projects
+        </motion.h2>
 
-                <div className="p-6">
-                  <h3 className={`text-xl font-bold mb-3 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {project.title}
-                  </h3>
-                  
-                  <p className={`text-sm mb-4 ${
-                    darkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>
-                    {project.description}
-                  </p>
+        <div className="mb-8">
+          <ProjectFilter projects={projects as any} />
+        </div>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className={`px-3 py-1 text-xs rounded-full ${
-                          darkMode 
-                            ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30' 
-                            : 'bg-blue-100 text-blue-800 border border-blue-200'
-                        }`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+        {/* Scrollable project container */}
+        <div className="max-h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-300">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                className={`rounded-xl ${
+                  darkMode
+                    ? 'bg-gray-900 border border-gray-700'
+                    : 'bg-white border border-gray-200'
+                } shadow-lg overflow-hidden`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.05,
+                  rotateY: 5,
+                  boxShadow: darkMode
+                    ? '0 25px 50px rgba(59, 130, 246, 0.2)'
+                    : '0 25px 50px rgba(0, 0, 0, 0.15)',
+                }}
+              >
+                <div
+                  className={`p-6 text-center ${
+                    darkMode
+                      ? 'bg-gradient-to-br from-blue-600 to-purple-600'
+                      : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                  }`}
+                >
+                  <div className="text-6xl mb-4">{project.image}</div>
+                </div>
 
-                  <div className="flex space-x-3">
-                    <motion.a
-                      href={project.github}
-                      className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
-                        darkMode 
-                          ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                      }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Github size={16} />
-                      <span className="text-sm">Code</span>
-                    </motion.a>
-                    
-                    <motion.a
-                      href={project.demo}
-                      className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <ExternalLink size={16} />
-                      <span className="text-sm">Demo</span>
-                    </motion.a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
+                <div className="p-6">
+                  <h3
+                    className={`text-xl font-bold mb-3 ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                  >
+                    {project.title}
+                  </h3>
+
+                  <p
+                    className={`text-sm mb-4 ${
+                      darkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}
+                  >
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className={`px-3 py-1 text-xs rounded-full ${
+                          darkMode
+                            ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30'
+                            : 'bg-blue-100 text-blue-800 border border-blue-200'
+                        }`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex space-x-3">
+                    <motion.a
+                      href={project.github}
+                      className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
+                        darkMode
+                          ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Github size={16} />
+                      <span className="text-sm">Code</span>
+                    </motion.a>
+
+                    {project.demo && (
+                      <motion.a
+                        href={project.demo}
+                        className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <ExternalLink size={16} />
+                        <span className="text-sm">Demo</span>
+                      </motion.a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ProjectsSection;
 
   // Experience Section
   const ExperienceSection = () => {
