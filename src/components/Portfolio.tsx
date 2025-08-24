@@ -550,7 +550,7 @@ const Portfolio = () => {
       },
       {
         title: 'Core Skills',
-        icon: <Layers size={24} />,
+        icon: <Cpu size={24} />,
         skills: [
           { name: 'DSA', level: 88 },
           { name: 'OOPS', level: 95 },
