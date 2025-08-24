@@ -653,12 +653,8 @@ const Portfolio = () => {
   };
 
   // Projects Section
- import React from 'react';
-import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
-import ProjectFilter from './ProjectFilter';
-
-const ProjectsSection = ({ darkMode, projectsRef }) => {
+// Projects Section - Fixed Version
+const ProjectsSection = () => {
   const projects = [
     {
       title: 'Portfolio Website',
@@ -793,7 +789,7 @@ const ProjectsSection = ({ darkMode, projectsRef }) => {
         </motion.h2>
 
         <div className="mb-8">
-          <ProjectFilter projects={projects as any} />
+          <ProjectFilter projects={projects} />
         </div>
 
         {/* Scrollable project container */}
@@ -897,9 +893,6 @@ const ProjectsSection = ({ darkMode, projectsRef }) => {
     </section>
   );
 };
-
-export default ProjectsSection;
-
   // Experience Section
   const ExperienceSection = () => {
     const experiences = [
