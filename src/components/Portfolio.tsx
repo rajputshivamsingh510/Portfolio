@@ -1021,74 +1021,117 @@ const ProjectsSection = () => {
   );
 };
   // Certificates Section
-  const CertificatesSection = () => {
-    const certificates = [
-      { title: 'AWS Certified Machine Learning', issuer: 'Amazon', year: '2023', icon: '🏆' },
-      { title: 'TensorFlow Developer Certificate', issuer: 'Google', year: '2023', icon: '🎖️' },
-      { title: 'Deep Learning Specialization', issuer: 'Coursera', year: '2022', icon: '🥇' },
-      { title: 'Data Science Professional', issuer: 'IBM', year: '2022', icon: '📜' },
-    ];
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Modal from './Modal'; // We'll create a simple Modal component
 
-    return (
-      <section
-        ref={certificatesRef}
-        id="certificates"
-        className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className={`text-4xl font-bold text-center mb-16 ${
-              darkMode ? 'text-white' : 'text-gray-900'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Certifications
-          </motion.h2>
+const CertificatesSection = ({ darkMode }: { darkMode: boolean }) => {
+  const certificateData = {
+    'Data Science': [
+      { title: 'Automate Cybersecurity Tasks with Python', year: '2025', file: '/certificates/Data Science/Automate Cybersecurity Tasks with Python.pdf' },
+      { title: 'bcg virtual internship', year: '2025', file: '/certificates/Data Science/bcg virtual internship.pdf' },
+      { title: 'CSS', year: '2025', file: '/certificates/Data Science/CSS.pdf' },
+      { title: 'DSA', year: '2025', file: '/certificates/Data Science/DSA.pdf' },
+      { title: 'Java as a Second language', year: '2025', file: '/certificates/Data Science/Java as a Second language.pdf' },
+      { title: 'lloyds intern', year: '2025', file: '/certificates/Data Science/lloyds intern.pdf' },
+      { title: 'Programmingin Python', year: '2025', file: '/certificates/Data Science/Programmingin Python.pdf' },
+      { title: 'React JS', year: '2025', file: '/certificates/Data Science/React JS.pdf' },
+    ],
+    'Data Science Certificates': [
+      { title: 'Data Analysis wwith Python', year: '2025', file: '/certificates/Data Science/certificate/Data Analysis wwith Python.pdf' },
+      { title: 'Data Analyst Career Guide and Interview Preparation', year: '2025', file: '/certificates/Data Science/certificate/Data Analyst Career Guide and Interview Preparation.pdf' },
+      { title: 'Data Science Methedology', year: '2025', file: '/certificates/Data Science/certificate/Data Science Methedology.pdf' },
+      { title: 'Data Scientist Career Guide and Interview Preparation', year: '2025', file: '/certificates/Data Science/certificate/Data Scientist Career Guide and Interview Preparation.pdf' },
+      { title: 'Data Visualization with Python', year: '2025', file: '/certificates/Data Science/certificate/Data Visualization with Python.pdf' },
+      { title: 'Databases and SQL for Data Science with Python', year: '2025', file: '/certificates/Data Science/certificate/Databases and SQL for Data Science with Python.pdf' },
+      { title: 'Generative AI- Elevate Your Data Science Career', year: '2025', file: '/certificates/Data Science/certificate/Generative AI- Elevate Your Data Science Career.pdf' },
+      { title: 'Generative AI- Enhance your Data Analytics Career', year: '2025', file: '/certificates/Data Science/certificate/Generative AI- Enhance your Data Analytics Career.pdf' },
+      { title: 'IBM Data Science', year: '2025', file: '/certificates/Data Science/certificate/IBM Data Science.pdf' },
+      { title: 'IBMDesign20250204-28-os1011', year: '2025', file: '/certificates/Data Science/certificate/IBMDesign20250204-28-os1011.pdf' },
+      { title: 'Machine Learning with Python', year: '2025', file: '/certificates/Data Science/certificate/Machine Learning with Python.pdf' },
+      { title: 'Python for Data Science, AI & Development', year: '2025', file: '/certificates/Data Science/certificate/Python for Data Science, AI & Development.pdf' },
+      { title: 'Python Project for Data Science', year: '2025', file: '/certificates/Data Science/certificate/Python Project for Data Science.pdf' },
+    ],
+    'Power BI': [
+      { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/Data Science/Power Bi/Creative Design in Power BI.pdf' },
+      { title: 'Data Analysis and Visualization using Power BI', year: '2025', file: '/certificates/Data Science/Power Bi/Data Analysis and Visualization using Power BI.pdf' },
+      { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/Data Science/Power Bi/Data Modeling in Power BI.pdf' },
+      { title: 'Deploy and Maintain Power BI Assets and Capstone projec', year: '2025', file: '/certificates/Data Science/Power Bi/Deploy and Maintain Power BI Assets and Capstone projec.pdf' },
+      { title: 'Extract ,Tranform and  Load Data in Power BI', year: '2025', file: '/certificates/Data Science/Power Bi/Extract ,Tranform and  Load Data in Power BI.pdf' },
+      { title: 'Harnesing the Power of Data woith Power BI', year: '2025', file: '/certificates/Data Science/Power Bi/Harnesing the Power of Data woith Power BI.pdf' },
+      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/Data Science/Power Bi/Microsoft Power BI Data Analyst.pdf' },
+      { title: 'Preparing Data for Analysis with Microsoft Excel', year: '2025', file: '/certificates/Data Science/Power Bi/Preparing Data for Analysis with Microsoft Excel.pdf' },
+    ],
+  };
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {certificates.map((cert, index) => (
-              <motion.div
-                key={cert.title}
-                className={`p-6 rounded-xl ${
-                  darkMode ? 'bg-gray-900 border border-gray-700' : 'bg-white border border-gray-200'
-                } shadow-lg text-center cursor-pointer`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 10,
-                  boxShadow: darkMode 
-                    ? "0 20px 40px rgba(59, 130, 246, 0.2)"
-                    : "0 20px 40px rgba(0, 0, 0, 0.1)"
-                }}
-              >
-                <div className="text-4xl mb-4">{cert.icon}</div>
-                <h3 className={`font-bold mb-2 ${
-                  darkMode ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {cert.title}
-                </h3>
-                <p className={`text-sm ${
-                  darkMode ? 'text-blue-400' : 'text-blue-600'
-                }`}>
-                  {cert.issuer}
-                </p>
-                <p className={`text-xs mt-2 ${
-                  darkMode ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  {cert.year}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
+  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+
+  return (
+    <section className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`} id="certificates">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          className={`text-4xl font-bold text-center mb-16 ${darkMode ? 'text-white' : 'text-gray-900'}`}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Certifications
+        </motion.h2>
+
+        {Object.entries(certificateData).map(([category, certs]) => (
+          <div key={category} className="mb-12">
+            <h3 className={`text-2xl font-semibold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+              {category}
+            </h3>
+            <div className="flex space-x-6 overflow-x-auto scrollbar-none py-4 px-2">
+              {certs.map((cert, index) => (
+                <motion.div
+                  key={cert.title}
+                  className={`min-w-[250px] flex-shrink-0 p-6 rounded-xl ${
+                    darkMode ? 'bg-gray-900 border border-gray-700' : 'bg-white border border-gray-200'
+                  } shadow-lg text-center cursor-pointer transition-transform duration-300`}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    scale: 1.08,
+                    rotateY: 8,
+                    boxShadow: darkMode
+                      ? '0 20px 40px rgba(59, 130, 246, 0.3)'
+                      : '0 20px 40px rgba(0, 0, 0, 0.15)',
+                  }}
+                  onClick={() => setSelectedCert(cert.file)}
+                >
+                  <div className="text-5xl mb-4">📜</div>
+                  <h4 className={`font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {cert.title}
+                  </h4>
+                  <p className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    {cert.year}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {selectedCert && (
+          <Modal onClose={() => setSelectedCert(null)}>
+            <iframe
+              src={selectedCert}
+              className="w-full h-[80vh]"
+              title="Certificate"
+            ></iframe>
+          </Modal>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default CertificatesSection;
+
 
   // Contact Section
   const ContactSection = () => {
