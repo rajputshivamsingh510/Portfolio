@@ -1049,41 +1049,43 @@ const Portfolio = () => {
     const [selectedCert, setSelectedCert] = useState(null);
     
     const certificateData = {
-      'Data Science': [
-        { title: 'Automate Cybersecurity Tasks with Python', year: '2025', file: '/certificates/Automate Cybersecurity Tasks with Python.pdf' },
-        { title: 'BCG Virtual data Science Internship', year: '2025', file: '/certificates/bcg virtual internship.pdf' },
-        { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf' },
-        { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf' },
-        { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java as a Second language.pdf' },
-        { title: 'Lloyds Internship', year: '2025', file: '/certificates/lloyds intern.pdf' },
-        { title: 'Programming in Python', year: '2025', file: '/certificates/Programmingin Python.pdf' },
-        { title: 'React JS', year: '2025', file: '/certificates/React JS.pdf' },
-      ],
-      'Data Science Certificates': [
-        { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data Analysis wwith Python.pdf' },
-        { title: 'Data Analyst Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data Analyst Career Guide and Interview Preparation.pdf' },
-        { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data Science Methedology.pdf' },
-        { title: 'Data Scientist Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data Scientist Career Guide and Interview Preparation.pdf' },
-        { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data Visualization with Python.pdf' },
-        { title: 'Databases and SQL for Data Science with Python', year: '2025', file: '/certificates/certificate/Databases and SQL for Data Science with Python.pdf' },
-        { title: 'Generative AI: Elevate Your Data Science Career', year: '2025', file: '/certificates/certificate/Generative AI- Elevate Your Data Science Career.pdf' },
-        { title: 'Generative AI: Enhance your Data Analytics Career', year: '2025', file: '/certificates/certificate/Generative AI- Enhance your Data Analytics Career.pdf' },
-        { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM Data Science.pdf' },
-        { title: 'IBM Design Certificate', year: '2025', file: '/certificates/certificate/IBMDesign20250204-28-os1011.pdf' },
-        { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine Learning with Python.pdf' },
-        { title: 'Python for Data Science, AI & Development', year: '2025', file: '/certificates/certificate/Python for Data Science, AI & Development.pdf' },
-        { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python Project for Data Science.pdf' },
-      ],
-      'Power BI': [
-        { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/Power Bi/Creative Design in Power BI.pdf' },
-        { title: 'Data Analysis and Visualization using Power BI', year: '2025', file: '/certificates/Power Bi/Data Analysis and Visualization using Power BI.pdf' },
-        { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/Power Bi/Data Modeling in Power BI.pdf' },
-        { title: 'Deploy and Maintain Power BI Assets and Capstone Project', year: '2025', file: '/certificates/Power Bi/Deploy and Maintain Power BI Assets and Capstone projec.pdf' },
-        { title: 'Extract, Transform and Load Data in Power BI', year: '2025', file: '/certificates/Power Bi/Extract ,Tranform and  Load Data in Power BI.pdf' },
-        { title: 'Harnessing the Power of Data with Power BI', year: '2025', file: '/certificates/Power Bi/Harnesing the Power of Data woith Power BI.pdf' },
-        { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/Power Bi/Microsoft Power BI Data Analyst.pdf' },
-        { title: 'Preparing Data for Analysis with Microsoft Excel', year: '2025', file: '/certificates/Power Bi/Preparing Data for Analysis with Microsoft Excel.pdf' },
-      ],
+        'Data Science': [
+          { title: 'Automate Cybersecurity Tasks with Python', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf' },
+          { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf' },
+          { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf' },
+          { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf' },
+          { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf' },
+          { title: 'Lloyds Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf' },
+          { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf' },
+          { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf' },
+        ],
+      
+        'Data Science Certificates': [
+          { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf' },
+          { title: 'Data Analyst Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf' },
+          { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf' },
+          { title: 'Data Scientist Career Guide and Interview Preparation', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf' },
+          { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf' },
+          { title: 'Databases and SQL for Data Science with Python', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf' },
+          { title: 'Generative AI: Elevate Your Data Science Career', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf' },
+          { title: 'Generative AI: Enhance your Data Analytics Career', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf' },
+          { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf' },
+          { title: 'IBM Design Certificate', year: '2025', file: '/certificates/certificate/IBM-Design-20250204-28-os1011.pdf' },
+          { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf' },
+          { title: 'Python for Data Science, AI & Development', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf' },
+          { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf' },
+        ],
+      
+        'Power BI': [
+          { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf' },
+          { title: 'Data Analysis and Visualization using Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf' },
+          { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf' },
+          { title: 'Deploy and Maintain Power BI Assets and Capstone Project', year: '2025', file: '/certificates/PowerBI/Deploy-and-Maintain-Power-BI-Assets-and-Capstone-Project.pdf' },
+          { title: 'Extract, Transform and Load Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf' },
+          { title: 'Harnessing the Power of Data with Power BI', year: '2025', file: '/certificates/PowerBI/Harnessing-the-Power-of-Data-with-Power-BI.pdf' },
+          { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf' },
+          { title: 'Preparing Data for Analysis with Microsoft Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf' },
+        ]
     };
 
     return (
