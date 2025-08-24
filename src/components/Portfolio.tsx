@@ -772,7 +772,6 @@ const ProjectsSection = () => {
 
   return (
     <section
-      ref={projectsRef}
       id="projects"
       className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
     >
@@ -792,102 +791,100 @@ const ProjectsSection = () => {
           <ProjectFilter projects={projects} />
         </div>
 
-        {/* Scrollable project container */}
-        <div className="max-h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-300">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                className={`rounded-xl ${
+        {/* Grid container - no scroll */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              className={`rounded-xl ${
+                darkMode
+                  ? 'bg-gray-900 border border-gray-700'
+                  : 'bg-white border border-gray-200'
+              } shadow-lg overflow-hidden`}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5,
+                boxShadow: darkMode
+                  ? '0 25px 50px rgba(59, 130, 246, 0.2)'
+                  : '0 25px 50px rgba(0, 0, 0, 0.15)',
+              }}
+            >
+              <div
+                className={`p-6 text-center ${
                   darkMode
-                    ? 'bg-gray-900 border border-gray-700'
-                    : 'bg-white border border-gray-200'
-                } shadow-lg overflow-hidden`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  rotateY: 5,
-                  boxShadow: darkMode
-                    ? '0 25px 50px rgba(59, 130, 246, 0.2)'
-                    : '0 25px 50px rgba(0, 0, 0, 0.15)',
-                }}
+                    ? 'bg-gradient-to-br from-blue-600 to-purple-600'
+                    : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                }`}
               >
-                <div
-                  className={`p-6 text-center ${
-                    darkMode
-                      ? 'bg-gradient-to-br from-blue-600 to-purple-600'
-                      : 'bg-gradient-to-br from-blue-500 to-purple-500'
+                <div className="text-6xl mb-4">{project.image}</div>
+              </div>
+
+              <div className="p-6">
+                <h3
+                  className={`text-xl font-bold mb-3 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
                   }`}
                 >
-                  <div className="text-6xl mb-4">{project.image}</div>
+                  {project.title}
+                </h3>
+
+                <p
+                  className={`text-sm mb-4 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}
+                >
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className={`px-3 py-1 text-xs rounded-full ${
+                        darkMode
+                          ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30'
+                          : 'bg-blue-100 text-blue-800 border border-blue-200'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="p-6">
-                  <h3
-                    className={`text-xl font-bold mb-3 ${
-                      darkMode ? 'text-white' : 'text-gray-900'
+                <div className="flex space-x-3">
+                  <motion.a
+                    href={project.github}
+                    className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
+                      darkMode
+                        ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                        : 'border-gray-300 text-gray-700 hover:bg-gray-50'
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {project.title}
-                  </h3>
+                    <Github size={16} />
+                    <span className="text-sm">Code</span>
+                  </motion.a>
 
-                  <p
-                    className={`text-sm mb-4 ${
-                      darkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}
-                  >
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className={`px-3 py-1 text-xs rounded-full ${
-                          darkMode
-                            ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30'
-                            : 'bg-blue-100 text-blue-800 border border-blue-200'
-                        }`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex space-x-3">
+                  {project.demo && (
                     <motion.a
-                      href={project.github}
-                      className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg border ${
-                        darkMode
-                          ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                      }`}
+                      href={project.demo}
+                      className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Github size={16} />
-                      <span className="text-sm">Code</span>
+                      <ExternalLink size={16} />
+                      <span className="text-sm">Demo</span>
                     </motion.a>
-
-                    {project.demo && (
-                      <motion.a
-                        href={project.demo}
-                        className="flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <ExternalLink size={16} />
-                        <span className="text-sm">Demo</span>
-                      </motion.a>
-                    )}
-                  </div>
+                  )}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -896,119 +893,133 @@ const ProjectsSection = () => {
   // Experience Section
   const ExperienceSection = () => {
     const experiences = [
-      {
-        title: 'Senior AI/ML Engineer',
-        company: 'Tech Solutions Inc.',
-        period: '2022 - Present',
-        description: 'Leading AI/ML initiatives, developing production-ready models, and mentoring junior developers.',
-        icon: '🚀'
-      },
-      {
-        title: 'Data Scientist',
-        company: 'Analytics Corp',
-        period: '2020 - 2022',
-        description: 'Built predictive models for business intelligence and automated data pipeline processes.',
-        icon: '📈'
-      },
-      {
-        title: 'ML Engineer Intern',
-        company: 'StartupXYZ',
-        period: '2019 - 2020',
-        description: 'Developed recommendation systems and worked on natural language processing projects.',
-        icon: '🎓'
-      }
+     {
+          title: 'AI/ML Developer Intern',
+          company: 'Scoreazy (Remote)',
+          period: '2025',
+          description: 'Built automation tools like LinkedIn Profile Outreach and YouTube Transcript Extractor using Python and Selenium.',
+          icon: '🤖'
+        },
+        {
+          title: 'Data Science Intern',
+          company: 'SmartBank (Lloyds Banking Group)',
+          period: '2025',
+          description: 'Worked on customer churn prediction: data collection, EDA, preprocessing, and predictive modeling using ML.',
+          icon: '📊'
+        },
+        {
+          title: 'Python & ML Projects',
+          company: 'Self-initiated Projects',
+          period: '2024 - 2025',
+          description: 'Developed multiple AI/ML projects including Wallet Risk Scoring, Stock Price Prediction, and PDF Content Analysis using Python, ML, LSTM, Transformers, and Deep Learning.',
+          icon: '💻'
+        }
     ];
 
-    return (
-      <section
-        ref={experienceRef}
-        id="experience"
-        className={`py-20 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className={`text-4xl font-bold text-center mb-16 ${
-              darkMode ? 'text-white' : 'text-gray-900'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Experience
-          </motion.h2>
+   return (
+    <section
+      id="experience"
+      className={`py-20 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          className={`text-4xl font-bold text-center mb-16 ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Experience
+        </motion.h2>
 
-          <div className="relative">
-            <div className={`absolute left-1/2 transform -translate-x-1/2 h-full w-1 ${
-              darkMode ? 'bg-blue-600' : 'bg-blue-500'
-            }`} />
+        <div className="relative">
+          {/* Vertical line */}
+          <div
+            className={`absolute left-1/2 transform -translate-x-1/2 h-full w-1 ${
+              darkMode ? 'bg-blue-600' : 'bg-blue-500'
+            }`}
+          />
 
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.title}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'justify-start' : 'justify-end'
-                } mb-12`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-              >
-                <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
-                  <motion.div
-                    className={`p-6 rounded-xl ${
-                      darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                    } shadow-lg`}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                  >
-                    <div className="flex items-center space-x-3 mb-3">
-                      <div className="text-2xl">{exp.icon}</div>
-                      <div>
-                        <h3 className={`font-bold ${
-                          darkMode ? 'text-white' : 'text-gray-900'
-                        }`}>
-                          {exp.title}
-                        </h3>
-                        <p className={`text-sm ${
-                          darkMode ? 'text-blue-400' : 'text-blue-600'
-                        }`}>
-                          {exp.company}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center space-x-2 mb-3">
-                      <Calendar size={16} className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
-                      <span className={`text-sm ${
-                        darkMode ? 'text-gray-400' : 'text-gray-500'
-                      }`}>
-                        {exp.period}
-                      </span>
-                    </div>
-                    
-                    <p className={`text-sm ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      {exp.description}
-                    </p>
-                  </motion.div>
-                </div>
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={exp.title}
+              className={`relative flex items-center ${
+                index % 2 === 0 ? 'justify-start' : 'justify-end'
+              } mb-12`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2 }}
+            >
+              <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
+                <motion.div
+                  className={`p-6 rounded-xl ${
+                    darkMode
+                      ? 'bg-gray-800 border border-gray-700'
+                      : 'bg-white border border-gray-200'
+                  } shadow-lg`}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="text-2xl">{exp.icon}</div>
+                    <div>
+                      <h3
+                        className={`font-bold ${
+                          darkMode ? 'text-white' : 'text-gray-900'
+                        }`}
+                      >
+                        {exp.title}
+                      </h3>
+                      <p
+                        className={`text-sm ${
+                          darkMode ? 'text-blue-400' : 'text-blue-600'
+                        }`}
+                      >
+                        {exp.company}
+                      </p>
+                    </div>
+                  </div>
 
-                <motion.div
-                  className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full ${
-                    darkMode ? 'bg-blue-600' : 'bg-blue-500'
-                  } border-4 ${
-                    darkMode ? 'border-gray-900' : 'border-gray-50'
-                  }`}
-                  whileHover={{ scale: 1.5 }}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
+                  <div className="flex items-center space-x-2 mb-3">
+                    <Calendar
+                      size={16}
+                      className={darkMode ? 'text-gray-400' : 'text-gray-500'}
+                    />
+                    <span
+                      className={`text-sm ${
+                        darkMode ? 'text-gray-400' : 'text-gray-500'
+                      }`}
+                    >
+                      {exp.period}
+                    </span>
+                  </div>
 
+                  <p
+                    className={`text-sm ${
+                      darkMode ? 'text-gray-300' : 'text-gray-700'
+                    }`}
+                  >
+                    {exp.description}
+                  </p>
+                </motion.div>
+              </div>
+
+              <motion.div
+                className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full ${
+                  darkMode ? 'bg-blue-600' : 'bg-blue-500'
+                } border-4 ${
+                  darkMode ? 'border-gray-900' : 'border-gray-50'
+                }`}
+                whileHover={{ scale: 1.5 }}
+              />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
   // Certificates Section
   const CertificatesSection = () => {
     const certificates = [
