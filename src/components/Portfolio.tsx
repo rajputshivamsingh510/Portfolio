@@ -1162,7 +1162,7 @@ const Portfolio = () => {
       e.preventDefault();
     
       try {
-        const response = await fetch('https://portfolio-backend-jxnj.onrender.com/api/contact', {
+        const response = await fetch('https://portfolio-backend-jxnj.onrender.com/send-message', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
