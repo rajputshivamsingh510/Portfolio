@@ -5,11 +5,12 @@ type Datum = { subject: string; A: number; fullMark: number };
 
 const data: Datum[] = [
   { subject: 'Python', A: 95, fullMark: 100 },
+  { subject: 'Java', A: 90, fullMark: 100 }, 
   { subject: 'ML', A: 92, fullMark: 100 },
   { subject: 'DL', A: 88, fullMark: 100 },
-  { subject: 'Data', A: 90, fullMark: 100 },
-  { subject: 'Cloud', A: 85, fullMark: 100 },
-  { subject: 'MLOps', A: 84, fullMark: 100 },
+  { subject: 'Data Science', A: 90, fullMark: 100 },
+  { subject: 'SQL', A: 80, fullMark: 100 },
+  { subject: 'OOPS & DSA', A: 85, fullMark: 100 },
 ];
 
 export default function SkillsRadar() {
