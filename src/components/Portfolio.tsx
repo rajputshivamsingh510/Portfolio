@@ -1053,7 +1053,7 @@ const Portfolio = () => {
         { title: 'Automate Cybersecurity Tasks with Python', year: '2025', file: '/certificates/Automate Cybersecurity Tasks with Python.pdf' },
         { title: 'BCG Virtual data Science Internship', year: '2025', file: '/certificates/bcg virtual internship.pdf' },
         { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf' },
-        { title: 'DSA', year: '2025', file: 'certificates/DSA.pdf' },
+        { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf' },
         { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java as a Second language.pdf' },
         { title: 'Lloyds Internship', year: '2025', file: '/certificates/lloyds intern.pdf' },
         { title: 'Programming in Python', year: '2025', file: '/certificates/Programmingin Python.pdf' },
