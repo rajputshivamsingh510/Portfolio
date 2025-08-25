@@ -396,18 +396,20 @@ const Portfolio = () => {
               <span>Download Resume</span>
             </motion.button>
 
-            <motion.button
-              className={`border-2 ${
-                darkMode
-                  ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
-                  : 'border-blue-600 text-blue-600 hover:bg-blue-600'
-              } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Mail size={20} />
-              <span>Contact Me</span>
-            </motion.button>
+           <motion.button
+            onClick={() => contactRef.current.scrollIntoView({ behavior: 'smooth' })}
+            className={`border-2 ${
+              darkMode
+                ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
+                : 'border-blue-600 text-blue-600 hover:bg-blue-600'
+            } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Mail size={20} />
+            <span>Contact Me</span>
+          </motion.button>
+
           </div>
         </motion.div>
       </div>
