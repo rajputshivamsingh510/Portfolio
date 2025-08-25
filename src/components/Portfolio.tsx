@@ -1122,18 +1122,18 @@ const certificateData = {
     ],
 
     'Power BI & Analytics': [
-      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
-      { title: 'Data Analysis with Power BI', year: '2025', file: '/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
-      { title: 'Data Modeling in Power BI', year: '2025', file: '/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
+      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: 'https://drive.google.com/file/d/132qZsUb3JiwiXv6KXuvrqb4tJsTApHrv/preview', icon: '📊' },
+      { title: 'Data Analysis with Power BI', year: '2025', file: 'https://drive.google.com/file/d/1lRRD3vlOjhriDyy-HXMsm4F1mY5UGjpF/preview', icon: '📈' },
+      { title: 'Data Modeling in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1j_yjh6eKW7wbjo4N1x4Xo3HTzdq3YIzY/preview', icon: '🏗️' },
       { title: 'Creative Design in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1HJp9W4G8JTLL3tBmOIDFBFDWMAtzlMzw/preview', icon: '🎨' },
-      { title: 'ETL Data in Power BI', year: '2025', file: '/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
-      { title: 'Preparing Data with Excel', year: '2025', file: '/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
+      { title: 'ETL Data in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1GX6FYvIprNfmczKMZurOu0lTrQdlgv8h/preview, icon: '⚙️' },
+      { title: 'Preparing Data with Excel', year: '2025', file: 'https://drive.google.com/file/d/18M9mlne1kefVpGNN4GZownZbDTO5Nv-u/preview', icon: '📋' },
     ],
 
     'Cybersecurity & Career': [
       { title: 'Automate Cybersecurity Tasks', year: '2025', file: 'https://drive.google.com/file/d/1OqkhaQrq01O4YKcsxsbaDx2_zrHkO8QC/preview', icon: '🔐' },
       { title: 'BCG Virtual Data Science Internship', year: '2025', file: 'https://drive.google.com/file/d/1Mm6Qh031MTF_X0l8paPGEdizFCevM-Zw/preview', icon: '💼' },
-      { title: 'Lloyds Banking Internship', year: '2025', file: '/Lloyds-Intern.pdf', icon: '🏦' },
+      { title: 'Lloyds Banking Internship', year: '2025', file: 'https://drive.google.com/file/d/1ll2BQVYbu7juJswatnttpczIP4dIVJdY/preview', icon: '🏦' },
       // These also use the certificate subdirectory
       { title: 'Data Analyst Career Guide', year: '2025', file: '/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
       { title: 'Data Scientist Career Guide', year: '2025', file: '/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
