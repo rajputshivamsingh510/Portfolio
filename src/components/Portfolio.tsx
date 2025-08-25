@@ -264,277 +264,249 @@ const Portfolio = () => {
     );
   };
   
-  // Professional AI Data Visualization Component
-  const AIDataVisualization = () => {
-    const [activeMetric, setActiveMetric] = useState(0);
-    const [dataStreams, setDataStreams] = useState([]);
-    const [processingLoad, setProcessingLoad] = useState(65);
+  //AI widget
+ import React, { useState, useEffect } from 'react';
+import { Code2, Sparkles, Rocket, Award, ChevronRight, Play, Pause } from 'lucide-react';
 
-    const metrics = [
-      { 
-        name: 'Neural Networks', 
-        value: 94, 
-        trend: '+12%',
-        icon: Brain,
-        color: '#3B82F6',
-        description: 'Deep Learning Models'
-      },
-      { 
-        name: 'Machine Learning', 
-        value: 91, 
-        trend: '+8%',
-        icon: Cpu,
-        color: '#8B5CF6',
-        description: 'Predictive Analytics'
-      },
-      { 
-        name: 'Data Processing', 
-        value: 88, 
-        trend: '+15%',
-        icon: Database,
-        color: '#10B981',
-        description: 'ETL Pipelines'
-      },
-      { 
-        name: 'Model Deployment', 
-        value: 86, 
-        trend: '+22%',
-        icon: Cloud,
-        color: '#F59E0B',
-        description: 'Production Systems'
-      }
-    ];
+const AIPortfolioShowcase = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [hoveredProject, setHoveredProject] = useState(null);
+  
+  const projects = [
+    {
+      id: 1,
+      title: "Neural Style Transfer",
+      category: "Computer Vision",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
+      tech: ["PyTorch", "CNN", "OpenCV"],
+      impact: "45% faster processing",
+      color: "from-purple-600 to-blue-600"
+    },
+    {
+      id: 2,
+      title: "Predictive Analytics Engine",
+      category: "Machine Learning",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+      tech: ["Scikit-learn", "TensorFlow", "AWS"],
+      impact: "92% accuracy achieved",
+      color: "from-green-500 to-teal-600"
+    },
+    {
+      id: 3,
+      title: "NLP Sentiment Analyzer",
+      category: "Natural Language Processing",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
+      tech: ["BERT", "Transformers", "FastAPI"],
+      impact: "Real-time processing",
+      color: "from-orange-500 to-red-600"
+    },
+    {
+      id: 4,
+      title: "MLOps Pipeline",
+      category: "DevOps & Deployment",
+      image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=400&h=300&fit=crop",
+      tech: ["Docker", "Kubernetes", "MLflow"],
+      impact: "CI/CD automation",
+      color: "from-indigo-500 to-purple-600"
+    }
+  ];
 
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setActiveMetric((prev) => (prev + 1) % metrics.length);
-        setProcessingLoad(prev => 60 + Math.random() * 30);
+  const achievements = [
+    { icon: Award, label: "Certifications", count: "15+", subtext: "Industry validated" },
+    { icon: Rocket, label: "Projects", count: "25+", subtext: "Successfully deployed" },
+    { icon: Code2, label: "Technologies", count: "20+", subtext: "Mastered tools" },
+    { icon: Sparkles, label: "Experience", count: "2+", subtext: "Years building AI" }
+  ];
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % projects.length);
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [isPlaying, projects.length]);
+
+  const FloatingParticles = () => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(15)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30 animate-pulse"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            animationDuration: `${2 + Math.random() * 2}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-7xl mx-auto p-6">
+      {/* Main Grid Layout */}
+      <div className="grid lg:grid-cols-2 gap-8 h-[600px]">
         
-        setDataStreams(prev => [
-          ...prev.slice(-15),
-          {
-            id: Date.now(),
-            value: Math.random() * 100,
-            timestamp: Date.now()
-          }
-        ]);
-      }, 3000);
-      
-      return () => clearInterval(interval);
-    }, []);
-
-    const DataStreamVisualization = () => (
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating Data Particles */}
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full ${
-              darkMode ? 'bg-blue-400' : 'bg-blue-600'
-            }`}
-            animate={{
-              x: [0, Math.cos(i * 30 * Math.PI / 180) * 200],
-              y: [0, Math.sin(i * 30 * Math.PI / 180) * 200],
-              opacity: [0, 0.8, 0],
-              scale: [0, 1.5, 0]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              delay: i * 0.3,
-              ease: "easeInOut"
-            }}
-            style={{
-              left: '50%',
-              top: '50%'
-            }}
-          />
-        ))}
-
-        {/* Neural Network Grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path 
-                d="M 40 0 L 0 0 0 40" 
-                fill="none" 
-                stroke={darkMode ? '#374151' : '#E5E7EB'} 
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+        {/* Left Side - Featured Project Showcase */}
+        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+          <FloatingParticles />
           
-          {/* Dynamic connection lines */}
-          {[...Array(6)].map((_, i) => (
-            <motion.line
-              key={i}
-              x1={`${20 + i * 80}%`}
-              y1="20%"
-              x2={`${40 + i * 60}%`}
-              y2="80%"
-              stroke={metrics[activeMetric].color}
-              strokeWidth="2"
-              opacity="0.4"
-              animate={{
-                pathLength: [0, 1, 0],
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 0.2
-              }}
-            />
-          ))}
-        </svg>
-      </div>
-    );
-
-    return (
-      <div className="relative w-full h-96 max-w-lg mx-auto">
-        {/* Background Glass Effect */}
-        <div className={`absolute inset-0 rounded-2xl ${
-          darkMode 
-            ? 'bg-gray-800/40 border border-gray-700/50' 
-            : 'bg-white/40 border border-gray-200/50'
-        } backdrop-blur-xl shadow-2xl`} />
-
-        {/* Data Stream Background */}
-        <DataStreamVisualization />
-
-        {/* Main Content */}
-        <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <motion.h3 
-              className={`text-xl font-bold ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              } mb-2`}
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              AI/ML Performance Dashboard
-            </motion.h3>
-            <div className={`text-sm ${
-              darkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              Real-time Model Analytics
-            </div>
-          </div>
-
-          {/* Central Processing Unit */}
-          <div className="flex-1 flex items-center justify-center">
-            <div className="relative">
-              {/* Processing Load Ring */}
-              <div className="relative w-32 h-32">
-                <svg className="absolute inset-0 w-full h-full transform -rotate-90">
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="56"
-                    stroke={darkMode ? '#374151' : '#E5E7EB'}
-                    strokeWidth="8"
-                    fill="transparent"
-                    opacity="0.3"
+          {/* Project Slider */}
+          <div className="relative h-full">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                  index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                }`}
+              >
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
                   />
-                  <motion.circle
-                    cx="64"
-                    cy="64"
-                    r="56"
-                    stroke={metrics[activeMetric].color}
-                    strokeWidth="8"
-                    fill="transparent"
-                    strokeLinecap="round"
-                    animate={{
-                      strokeDasharray: `${(processingLoad / 100) * 351.86} 351.86`
-                    }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
-                  />
-                </svg>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-80`} />
+                  <div className="absolute inset-0 bg-black/20" />
+                </div>
                 
-                {/* Center Icon and Value */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <motion.div
-                    key={activeMetric}
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ duration: 0.5, type: "spring" }}
-                  >
-                    <metrics[activeMetric].icon 
-                      size={24} 
-                      color={metrics[activeMetric].color}
-                    />
-                  </motion.div>
-                  <div className={`text-lg font-bold mt-1 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {Math.round(processingLoad)}%
+                {/* Content */}
+                <div className="relative z-10 p-8 h-full flex flex-col justify-between text-white">
+                  <div>
+                    <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm mb-4">
+                      {project.category}
+                    </div>
+                    <h3 className="text-3xl font-bold mb-4 leading-tight">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, techIndex) => (
+                        <span 
+                          key={techIndex}
+                          className="px-3 py-1 bg-white/15 backdrop-blur-sm rounded-lg text-sm font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
+                      <div className="text-lg font-semibold">{project.impact}</div>
+                      <div className="text-sm opacity-80">Key Achievement</div>
+                    </div>
+                    <button className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <ChevronRight size={20} />
+                    </button>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+          
+          {/* Controls */}
+          <div className="absolute bottom-6 left-8 flex items-center gap-4">
+            <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors text-white"
+            >
+              {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+            </button>
+            <div className="flex gap-2">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side - Stats and Skills */}
+        <div className="space-y-6">
+          
+          {/* Achievement Cards */}
+          <div className="grid grid-cols-2 gap-4">
+            {achievements.map((achievement, index) => {
+              const IconComponent = achievement.icon;
+              return (
+                <div
+                  key={index}
+                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                  onMouseEnter={() => setHoveredProject(index)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <div className="relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <IconComponent size={24} className="text-white" />
+                    </div>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {achievement.count}
+                    </div>
+                    <div className="text-sm font-medium text-gray-700 mb-1">
+                      {achievement.label}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {achievement.subtext}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Skills Visualization */}
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 text-white">
+            <h4 className="text-xl font-bold mb-6 text-center">Core Expertise</h4>
+            <div className="space-y-4">
+              {skillAreas.map((skill, index) => (
+                <div key={index} className="group">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium">{skill.name}</span>
+                    <span className="text-sm text-gray-400">{skill.level}%</span>
+                  </div>
+                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg"
+                      style={{
+                        width: `${skill.level}%`,
+                        backgroundColor: skill.color,
+                        boxShadow: `0 0 20px ${skill.color}40`
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Metrics Display */}
-          <div className="grid grid-cols-2 gap-3">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={metric.name}
-                className={`p-3 rounded-lg cursor-pointer transition-all duration-300 ${
-                  activeMetric === index
-                    ? darkMode 
-                      ? 'bg-gray-700/60 border border-gray-600' 
-                      : 'bg-white/60 border border-gray-300'
-                    : darkMode
-                      ? 'bg-gray-800/30 hover:bg-gray-700/40'
-                      : 'bg-white/30 hover:bg-white/50'
-                }`}
-                whileHover={{ scale: 1.02, y: -2 }}
-                onClick={() => setActiveMetric(index)}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <metric.icon 
-                    size={16} 
-                    color={metric.color}
-                  />
-                  <span className={`text-xs font-medium ${
-                    darkMode ? 'text-green-400' : 'text-green-600'
-                  }`}>
-                    {metric.trend}
-                  </span>
-                </div>
-                <div className={`text-xs ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                } mb-1`}>
-                  {metric.name}
-                </div>
-                <div className={`text-sm font-bold ${
-                  darkMode ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {metric.value}%
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Status Indicator */}
-          <div className="mt-4 flex items-center justify-center space-x-2">
-            <motion.div
-              className="w-2 h-2 rounded-full bg-green-500"
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className={`text-xs ${
-              darkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              System Operational • {metrics[activeMetric].description}
-            </span>
+          {/* Call to Action */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white text-center">
+            <h4 className="text-lg font-bold mb-2">Ready to Collaborate?</h4>
+            <p className="text-blue-100 mb-4 text-sm">
+              Let's build the next breakthrough AI solution together
+            </p>
+            <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+              View All Projects
+            </button>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
   
   // Navigation
   const Navigation = () => (
