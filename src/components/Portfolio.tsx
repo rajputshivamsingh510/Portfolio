@@ -264,155 +264,278 @@ const Portfolio = () => {
     );
   };
   
-    // AI-Powered Interactive Widget Component
-  const AIWidget = () => {
-    const [activeNode, setActiveNode] = useState(0);
-    const [brainWaves, setBrainWaves] = useState([]);
-    
-    const aiNodes = [
-      { name: 'Neural Networks', color: 'from-blue-400 to-cyan-400', icon: '🧠' },
-      { name: 'Deep Learning', color: 'from-purple-400 to-pink-400', icon: '🔮' },
-      { name: 'Machine Learning', color: 'from-green-400 to-teal-400', icon: '⚙️' },
-      { name: 'Data Science', color: 'from-orange-400 to-red-400', icon: '📊' },
-      { name: 'Python Dev', color: 'from-yellow-400 to-orange-400', icon: '🐍' }
+  // Professional AI Data Visualization Component
+  const AIDataVisualization = () => {
+    const [activeMetric, setActiveMetric] = useState(0);
+    const [dataStreams, setDataStreams] = useState([]);
+    const [processingLoad, setProcessingLoad] = useState(65);
+
+    const metrics = [
+      { 
+        name: 'Neural Networks', 
+        value: 94, 
+        trend: '+12%',
+        icon: Brain,
+        color: '#3B82F6',
+        description: 'Deep Learning Models'
+      },
+      { 
+        name: 'Machine Learning', 
+        value: 91, 
+        trend: '+8%',
+        icon: Cpu,
+        color: '#8B5CF6',
+        description: 'Predictive Analytics'
+      },
+      { 
+        name: 'Data Processing', 
+        value: 88, 
+        trend: '+15%',
+        icon: Database,
+        color: '#10B981',
+        description: 'ETL Pipelines'
+      },
+      { 
+        name: 'Model Deployment', 
+        value: 86, 
+        trend: '+22%',
+        icon: Cloud,
+        color: '#F59E0B',
+        description: 'Production Systems'
+      }
     ];
 
     useEffect(() => {
       const interval = setInterval(() => {
-        setActiveNode((prev) => (prev + 1) % aiNodes.length);
-        setBrainWaves(prev => [...prev.slice(-20), Math.random()]);
-      }, 2000);
+        setActiveMetric((prev) => (prev + 1) % metrics.length);
+        setProcessingLoad(prev => 60 + Math.random() * 30);
+        
+        setDataStreams(prev => [
+          ...prev.slice(-15),
+          {
+            id: Date.now(),
+            value: Math.random() * 100,
+            timestamp: Date.now()
+          }
+        ]);
+      }, 3000);
       
       return () => clearInterval(interval);
     }, []);
 
-    return (
-      <div className="relative w-80 h-80 mx-auto">
-        {/* Central AI Core */}
-        <motion.div 
-          className={`absolute inset-16 rounded-full bg-gradient-to-r ${aiNodes[activeNode].color} opacity-20 blur-xl`}
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        
-        <motion.div 
-          className={`absolute inset-20 rounded-full bg-gradient-to-r ${aiNodes[activeNode].color} flex items-center justify-center border-2 border-white/20 backdrop-blur-sm`}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
+    const DataStreamVisualization = () => (
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating Data Particles */}
+        {[...Array(12)].map((_, i) => (
           <motion.div
-            key={activeNode}
-            className="text-4xl"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.5, type: "spring" }}
-          >
-            {aiNodes[activeNode].icon}
-          </motion.div>
-        </motion.div>
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${
+              darkMode ? 'bg-blue-400' : 'bg-blue-600'
+            }`}
+            animate={{
+              x: [0, Math.cos(i * 30 * Math.PI / 180) * 200],
+              y: [0, Math.sin(i * 30 * Math.PI / 180) * 200],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "easeInOut"
+            }}
+            style={{
+              left: '50%',
+              top: '50%'
+            }}
+          />
+        ))}
 
-        {/* Orbiting Skill Nodes */}
-        {aiNodes.map((node, index) => {
-          const angle = (index * 72) * Math.PI / 180;
-          const radius = 120;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          
-          return (
-            <motion.div
-              key={node.name}
-              className={`absolute w-12 h-12 rounded-full bg-gradient-to-r ${node.color} flex items-center justify-center text-sm font-bold text-white shadow-lg border-2 ${
-                activeNode === index ? 'border-white scale-110' : 'border-white/40'
-              } cursor-pointer`}
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: `translate(${x - 24}px, ${y - 24}px)`
-              }}
-              animate={{
-                scale: activeNode === index ? 1.1 : 0.9,
-                boxShadow: activeNode === index ? '0 0 20px rgba(255,255,255,0.5)' : '0 0 0px rgba(255,255,255,0)'
-              }}
-              whileHover={{ scale: 1.2, y: -5 }}
-              onClick={() => setActiveNode(index)}
-            >
-              <span className="text-xs">{node.name.split(' ')[0]}</span>
-            </motion.div>
-          );
-        })}
-
-        {/* Connecting Lines */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none">
-          {aiNodes.map((_, index) => {
-            const angle = (index * 72) * Math.PI / 180;
-            const radius = 120;
-            const x = Math.cos(angle) * radius + 160;
-            const y = Math.sin(angle) * radius + 160;
-            
-            return (
-              <motion.line
-                key={index}
-                x1="160" y1="160"
-                x2={x} y2={y}
-                stroke={activeNode === index ? '#60A5FA' : '#374151'}
-                strokeWidth={activeNode === index ? "2" : "1"}
-                opacity={activeNode === index ? 0.8 : 0.3}
-                animate={{
-                  strokeDasharray: activeNode === index ? "5,5" : "none",
-                  strokeDashoffset: activeNode === index ? [0, -10] : 0
-                }}
-                transition={{ 
-                  strokeDashoffset: { duration: 1, repeat: Infinity, ease: "linear" }
-                }}
+        {/* Neural Network Grid */}
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path 
+                d="M 40 0 L 0 0 0 40" 
+                fill="none" 
+                stroke={darkMode ? '#374151' : '#E5E7EB'} 
+                strokeWidth="1"
               />
-            );
-          })}
-        </svg>
-
-        {/* Data Flow Animation */}
-        <div className="absolute inset-0 overflow-hidden rounded-full">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          
+          {/* Dynamic connection lines */}
+          {[...Array(6)].map((_, i) => (
+            <motion.line
               key={i}
-              className="absolute w-1 h-1 bg-blue-400 rounded-full"
+              x1={`${20 + i * 80}%`}
+              y1="20%"
+              x2={`${40 + i * 60}%`}
+              y2="80%"
+              stroke={metrics[activeMetric].color}
+              strokeWidth="2"
+              opacity="0.4"
               animate={{
-                pathLength: [0, 1],
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0]
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.6, 0]
               }}
               transition={{
-                duration: 3,
+                duration: 2,
                 repeat: Infinity,
-                delay: i * 0.4,
-                ease: "easeInOut"
-              }}
-              style={{
-                left: `${20 + Math.sin(i * 45 * Math.PI / 180) * 60}%`,
-                top: `${20 + Math.cos(i * 45 * Math.PI / 180) * 60}%`
+                delay: i * 0.2
               }}
             />
           ))}
-        </div>
+        </svg>
+      </div>
+    );
 
-        {/* Active Skill Display */}
-        <motion.div
-          className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center"
-          key={activeNode}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-        >
-          <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-            {aiNodes[activeNode].name}
-          </span>
-        </motion.div>
+    return (
+      <div className="relative w-full h-96 max-w-lg mx-auto">
+        {/* Background Glass Effect */}
+        <div className={`absolute inset-0 rounded-2xl ${
+          darkMode 
+            ? 'bg-gray-800/40 border border-gray-700/50' 
+            : 'bg-white/40 border border-gray-200/50'
+        } backdrop-blur-xl shadow-2xl`} />
+
+        {/* Data Stream Background */}
+        <DataStreamVisualization />
+
+        {/* Main Content */}
+        <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <motion.h3 
+              className={`text-xl font-bold ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              } mb-2`}
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              AI/ML Performance Dashboard
+            </motion.h3>
+            <div className={`text-sm ${
+              darkMode ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              Real-time Model Analytics
+            </div>
+          </div>
+
+          {/* Central Processing Unit */}
+          <div className="flex-1 flex items-center justify-center">
+            <div className="relative">
+              {/* Processing Load Ring */}
+              <div className="relative w-32 h-32">
+                <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+                  <circle
+                    cx="64"
+                    cy="64"
+                    r="56"
+                    stroke={darkMode ? '#374151' : '#E5E7EB'}
+                    strokeWidth="8"
+                    fill="transparent"
+                    opacity="0.3"
+                  />
+                  <motion.circle
+                    cx="64"
+                    cy="64"
+                    r="56"
+                    stroke={metrics[activeMetric].color}
+                    strokeWidth="8"
+                    fill="transparent"
+                    strokeLinecap="round"
+                    animate={{
+                      strokeDasharray: `${(processingLoad / 100) * 351.86} 351.86`
+                    }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                  />
+                </svg>
+                
+                {/* Center Icon and Value */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <motion.div
+                    key={activeMetric}
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ duration: 0.5, type: "spring" }}
+                  >
+                    <metrics[activeMetric].icon 
+                      size={24} 
+                      color={metrics[activeMetric].color}
+                    />
+                  </motion.div>
+                  <div className={`text-lg font-bold mt-1 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {Math.round(processingLoad)}%
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Metrics Display */}
+          <div className="grid grid-cols-2 gap-3">
+            {metrics.map((metric, index) => (
+              <motion.div
+                key={metric.name}
+                className={`p-3 rounded-lg cursor-pointer transition-all duration-300 ${
+                  activeMetric === index
+                    ? darkMode 
+                      ? 'bg-gray-700/60 border border-gray-600' 
+                      : 'bg-white/60 border border-gray-300'
+                    : darkMode
+                      ? 'bg-gray-800/30 hover:bg-gray-700/40'
+                      : 'bg-white/30 hover:bg-white/50'
+                }`}
+                whileHover={{ scale: 1.02, y: -2 }}
+                onClick={() => setActiveMetric(index)}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <metric.icon 
+                    size={16} 
+                    color={metric.color}
+                  />
+                  <span className={`text-xs font-medium ${
+                    darkMode ? 'text-green-400' : 'text-green-600'
+                  }`}>
+                    {metric.trend}
+                  </span>
+                </div>
+                <div className={`text-xs ${
+                  darkMode ? 'text-gray-300' : 'text-gray-700'
+                } mb-1`}>
+                  {metric.name}
+                </div>
+                <div className={`text-sm font-bold ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                }`}>
+                  {metric.value}%
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Status Indicator */}
+          <div className="mt-4 flex items-center justify-center space-x-2">
+            <motion.div
+              className="w-2 h-2 rounded-full bg-green-500"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <span className={`text-xs ${
+              darkMode ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              System Operational • {metrics[activeMetric].description}
+            </span>
+          </div>
+        </div>
       </div>
     );
   };
-
+  
   // Navigation
   const Navigation = () => (
     <motion.nav
@@ -477,8 +600,8 @@ const Portfolio = () => {
       </div>
     </motion.nav>
   );
-
-   // Hero Section
+  
+//Hero Section
     const HeroSection = () => (
       <section
         ref={heroRef}
@@ -494,14 +617,14 @@ const Portfolio = () => {
         {/* Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Side - AI Widget */}
+            {/* Left Side - AI Data Visualization */}
             <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, x: -100, rotateY: -30 }}
               animate={{ opacity: 1, x: 0, rotateY: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
             >
-              <AIWidget />
+              <AIDataVisualization />
             </motion.div>
   
             {/* Right Side - Content */}
