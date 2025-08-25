@@ -1105,7 +1105,7 @@ const certificateData = {
   'Programming & Development': [ 
     { title: 'Programming in Python', year: '2025', file: '/Programming-in-Python.pdf', icon: '🐍' }, 
     { title: 'Java as a Second Language', year: '2025', file: '/Java-as-a-Second-Language.pdf', icon: '☕' }, 
-    { title: 'CSS', year: '2025', file: '/CSS.pdf', icon: '🎨' }, 
+    { title: 'CSS', year: '2025', file:  'https://drive.google.com/file/d/1Jm9-f6iOv9eRP_xHO8WPKl7hERxOii3o/preview', icon: '🎨' }, 
     { title: 'React JS', year: '2025', file: '/React-JS.pdf', icon: '⚛️' }, 
     { title: 'DSA', year: '2025', file: '/DSA.pdf', icon: '🧮' }, ],
     
