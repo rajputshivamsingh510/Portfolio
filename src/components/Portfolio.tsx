@@ -1270,7 +1270,7 @@ const certificateData = {
       e.preventDefault();
   
       try {
-        const response = await fetch('https://portfolio-backend-blue-ten.vercel.app/send', {
+        const response = await fetch('https://portfolio-backend-blue-ten.vercel.app/send-message', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
