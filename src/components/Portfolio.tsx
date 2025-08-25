@@ -264,249 +264,260 @@ const Portfolio = () => {
     );
   };
   
-  //AI widget
- import React, { useState, useEffect } from 'react';
-import { Code2, Sparkles, Rocket, Award, ChevronRight, Play, Pause } from 'lucide-react';
+// AIMLParticleNetwork.tsx
+import React, { useMemo, useRef, useState } from "react";
+import * as THREE from "three";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, Effects } from "@react-three/drei";
 
-const AIPortfolioShowcase = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [hoveredProject, setHoveredProject] = useState(null);
-  
-  const projects = [
-    {
-      id: 1,
-      title: "Neural Style Transfer",
-      category: "Computer Vision",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop",
-      tech: ["PyTorch", "CNN", "OpenCV"],
-      impact: "45% faster processing",
-      color: "from-purple-600 to-blue-600"
-    },
-    {
-      id: 2,
-      title: "Predictive Analytics Engine",
-      category: "Machine Learning",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-      tech: ["Scikit-learn", "TensorFlow", "AWS"],
-      impact: "92% accuracy achieved",
-      color: "from-green-500 to-teal-600"
-    },
-    {
-      id: 3,
-      title: "NLP Sentiment Analyzer",
-      category: "Natural Language Processing",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
-      tech: ["BERT", "Transformers", "FastAPI"],
-      impact: "Real-time processing",
-      color: "from-orange-500 to-red-600"
-    },
-    {
-      id: 4,
-      title: "MLOps Pipeline",
-      category: "DevOps & Deployment",
-      image: "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=400&h=300&fit=crop",
-      tech: ["Docker", "Kubernetes", "MLflow"],
-      impact: "CI/CD automation",
-      color: "from-indigo-500 to-purple-600"
+type NetworkProps = {
+  /** Number of particles (150–300 recommended) */
+  count?: number;
+  /** Radius of the particle cloud */
+  radius?: number;
+  /** Distance threshold for connecting lines */
+  linkDistance?: number;
+  /** Max links per node (keeps perf in check) */
+  maxLinksPerNode?: number;
+};
+
+function useMouseAttractor() {
+  const { size, viewport, camera } = useThree();
+  const mouse3 = useRef(new THREE.Vector3());
+  const onPointerMove = (e: THREE.Event & { clientX: number; clientY: number }) => {
+    const x = (e.clientX / size.width) * 2 - 1;
+    const y = -(e.clientY / size.height) * 2 + 1;
+    // project into 3D space at z ~ 0
+    const v = new THREE.Vector3(x, y, 0.5).unproject(camera);
+    mouse3.current.copy(v);
+  };
+  return { mouse3, onPointerMove, viewport };
+}
+
+function ParticleNetwork({
+  count = 200,
+  radius = 8,
+  linkDistance = 1.25,
+  maxLinksPerNode = 6,
+}: NetworkProps) {
+  const group = useRef<THREE.Group>(null!);
+  const pointsRef = useRef<THREE.Points>(null!);
+  const linesRef = useRef<THREE.LineSegments>(null!);
+  const velocities = useRef<THREE.Vector3[]>(
+    Array.from({ length: count }, () => new THREE.Vector3(
+      (Math.random() - 0.5) * 0.0025,
+      (Math.random() - 0.5) * 0.0025,
+      (Math.random() - 0.5) * 0.0025
+    ))
+  );
+  const { mouse3, onPointerMove } = useMouseAttractor();
+  const [hovering, setHovering] = useState(false);
+
+  // Generate initial positions in a sphere + colors
+  const { positions, colors } = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const col = new Float32Array(count * 3);
+    const colorA = new THREE.Color("#60a5fa"); // indigo-cyan vibes
+    const colorB = new THREE.Color("#22d3ee");
+    for (let i = 0; i < count; i++) {
+      // Fibonacci-ish sphere scatter
+      const u = Math.random();
+      const v = Math.random();
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+      const r = radius * Math.cbrt(Math.random()); // denser core
+      const x = r * Math.sin(phi) * Math.cos(theta);
+      const y = r * Math.sin(phi) * Math.sin(theta);
+      const z = r * Math.cos(phi);
+      pos[i * 3] = x;
+      pos[i * 3 + 1] = y;
+      pos[i * 3 + 2] = z;
+
+      const t = i / count;
+      const c = colorA.clone().lerp(colorB, t);
+      col[i * 3] = c.r;
+      col[i * 3 + 1] = c.g;
+      col[i * 3 + 2] = c.b;
     }
-  ];
+    return { positions: pos, colors: col };
+  }, [count, radius]);
 
-  const achievements = [
-    { icon: Award, label: "Certifications", count: "15+", subtext: "Industry validated" },
-    { icon: Rocket, label: "Projects", count: "25+", subtext: "Successfully deployed" },
-    { icon: Code2, label: "Technologies", count: "20+", subtext: "Mastered tools" },
-    { icon: Sparkles, label: "Experience", count: "2+", subtext: "Years building AI" }
-  ];
-
-  useEffect(() => {
-    if (!isPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % projects.length);
-    }, 4000);
-    
-    return () => clearInterval(interval);
-  }, [isPlaying, projects.length]);
-
-  const FloatingParticles = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(15)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-30 animate-pulse"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${2 + Math.random() * 2}s`
-          }}
-        />
-      ))}
-    </div>
+  // Allocate line buffer (worst case: count * maxLinksPerNode links → * 2 vertices)
+  const linePositions = useMemo(
+    () => new Float32Array(count * maxLinksPerNode * 2 * 3),
+    [count, maxLinksPerNode]
   );
 
+  useFrame((_, delta) => {
+    const pts = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute;
+    const arr = pts.array as Float32Array;
+
+    // Gentle auto-rotation
+    if (group.current) {
+      group.current.rotation.y += delta * 0.1;
+      group.current.rotation.x += delta * 0.02;
+    }
+
+    // Particle motion + soft attraction to mouse when hovering
+    for (let i = 0; i < count; i++) {
+      const i3 = i * 3;
+      const p = new THREE.Vector3(arr[i3], arr[i3 + 1], arr[i3 + 2]);
+      const v = velocities.current[i];
+
+      if (hovering) {
+        const dir = mouse3.current.clone().sub(p);
+        const dist = Math.max(dir.length(), 0.0001);
+        dir.normalize();
+        // inverse-square-ish attraction, clamped
+        const force = Math.min(0.0025 / (dist * dist), 0.0025);
+        v.addScaledVector(dir, force);
+      }
+
+      // mild damping + boundary wrap
+      v.multiplyScalar(0.985);
+      p.add(v);
+
+      const limit = radius * 1.15;
+      if (p.length() > limit) {
+        p.setLength(limit);
+        v.reflect(p.clone().normalize()).multiplyScalar(0.7);
+      }
+
+      arr[i3] = p.x;
+      arr[i3 + 1] = p.y;
+      arr[i3 + 2] = p.z;
+    }
+    pts.needsUpdate = true;
+
+    // Build dynamic links (local neighborhood)
+    let lineCount = 0;
+    const maxDist2 = linkDistance * linkDistance;
+    // Simple grid skip: check every nth to lighten O(n^2)
+    const stride = count > 220 ? 2 : 1;
+
+    for (let i = 0; i < count; i += 1) {
+      let links = 0;
+      const ix = arr[i * 3], iy = arr[i * 3 + 1], iz = arr[i * 3 + 2];
+      for (let j = i + stride; j < count && links < maxLinksPerNode; j += stride) {
+        const jx = arr[j * 3], jy = arr[j * 3 + 1], jz = arr[j * 3 + 2];
+        const dx = ix - jx, dy = iy - jy, dz = iz - jz;
+        const d2 = dx * dx + dy * dy + dz * dz;
+        if (d2 <= maxDist2) {
+          // write segment i -> j
+          const k = lineCount * 6;
+          linePositions[k] = ix;
+          linePositions[k + 1] = iy;
+          linePositions[k + 2] = iz;
+          linePositions[k + 3] = jx;
+          linePositions[k + 4] = jy;
+          linePositions[k + 5] = jz;
+          lineCount++;
+          links++;
+          if (lineCount >= linePositions.length / 6) break;
+        }
+      }
+      if (lineCount >= linePositions.length / 6) break;
+    }
+
+    const geo = linesRef.current.geometry as THREE.BufferGeometry;
+    const posAttr = geo.attributes.position as THREE.BufferAttribute;
+    posAttr.array = linePositions;
+    posAttr.needsUpdate = true;
+    geo.setDrawRange(0, lineCount * 2); // each line uses 2 vertices
+  });
+
   return (
-    <div className="w-full max-w-7xl mx-auto p-6">
-      {/* Main Grid Layout */}
-      <div className="grid lg:grid-cols-2 gap-8 h-[600px]">
-        
-        {/* Left Side - Featured Project Showcase */}
-        <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl overflow-hidden shadow-2xl">
-          <FloatingParticles />
-          
-          {/* Project Slider */}
-          <div className="relative h-full">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                  index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                }`}
-              >
-                {/* Background Image with Overlay */}
-                <div className="absolute inset-0">
-                  <img 
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-80`} />
-                  <div className="absolute inset-0 bg-black/20" />
-                </div>
-                
-                {/* Content */}
-                <div className="relative z-10 p-8 h-full flex flex-col justify-between text-white">
-                  <div>
-                    <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm mb-4">
-                      {project.category}
-                    </div>
-                    <h3 className="text-3xl font-bold mb-4 leading-tight">
-                      {project.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.map((tech, techIndex) => (
-                        <span 
-                          key={techIndex}
-                          className="px-3 py-1 bg-white/15 backdrop-blur-sm rounded-lg text-sm font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                      <div className="text-lg font-semibold">{project.impact}</div>
-                      <div className="text-sm opacity-80">Key Achievement</div>
-                    </div>
-                    <button className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <ChevronRight size={20} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Controls */}
-          <div className="absolute bottom-6 left-8 flex items-center gap-4">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors text-white"
-            >
-              {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-            </button>
-            <div className="flex gap-2">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+    <group
+      ref={group}
+      onPointerMove={(e) => {
+        setHovering(true);
+        // @ts-ignore - pass clientX/Y
+        onPointerMove(e);
+      }}
+      onPointerLeave={() => setHovering(false)}
+    >
+      {/* Particles */}
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={positions}
+            count={positions.length / 3}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            array={colors}
+            count={colors.length / 3}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.05}
+          vertexColors
+          transparent
+          opacity={0.95}
+          depthWrite={false}
+          // subtle glow via additive blending
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
 
-        {/* Right Side - Stats and Skills */}
-        <div className="space-y-6">
-          
-          {/* Achievement Cards */}
-          <div className="grid grid-cols-2 gap-4">
-            {achievements.map((achievement, index) => {
-              const IconComponent = achievement.icon;
-              return (
-                <div
-                  key={index}
-                  className="group relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
-                  onMouseEnter={() => setHoveredProject(index)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  
-                  <div className="relative">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <IconComponent size={24} className="text-white" />
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900 mb-1">
-                      {achievement.count}
-                    </div>
-                    <div className="text-sm font-medium text-gray-700 mb-1">
-                      {achievement.label}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      {achievement.subtext}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+      {/* Connection lines */}
+      <lineSegments ref={linesRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            array={linePositions}
+            count={linePositions.length / 3}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial
+          color={"#7dd3fc"}
+          transparent
+          opacity={0.25}
+          linewidth={1}
+        />
+      </lineSegments>
+    </group>
+  );
+}
 
-          {/* Skills Visualization */}
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 text-white">
-            <h4 className="text-xl font-bold mb-6 text-center">Core Expertise</h4>
-            <div className="space-y-4">
-              {skillAreas.map((skill, index) => (
-                <div key={index} className="group">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">{skill.name}</span>
-                    <span className="text-sm text-gray-400">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-1000 ease-out group-hover:shadow-lg"
-                      style={{
-                        width: `${skill.level}%`,
-                        backgroundColor: skill.color,
-                        boxShadow: `0 0 20px ${skill.color}40`
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+export default function AIMLParticleNetwork() {
+  return (
+    <div className="relative w-full h-[420px] md:h-[520px] lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
+      {/* Soft vignette */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(56,189,248,0.12),transparent_60%)]" />
+      <Canvas
+        dpr={[1, 2]}
+        camera={{ position: [0, 0, 12], fov: 55 }}
+        gl={{ antialias: true, alpha: true }}
+      >
+        <ambientLight intensity={0.4} />
+        <pointLight position={[10, 10, 10]} intensity={1.2} />
+        <pointLight position={[-10, -10, -10]} intensity={0.6} />
 
-          {/* Call to Action */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white text-center">
-            <h4 className="text-lg font-bold mb-2">Ready to Collaborate?</h4>
-            <p className="text-blue-100 mb-4 text-sm">
-              Let's build the next breakthrough AI solution together
-            </p>
-            <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-              View All Projects
-            </button>
-          </div>
-        </div>
+        <ParticleNetwork count={220} radius={6.5} linkDistance={1.35} maxLinksPerNode={6} />
+
+        {/* Nice, subtle controls (disable zoom for a tighter feel) */}
+        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.25} />
+
+        {/* Subtle bloom to feel "AI" */}
+        <Effects disableGamma>
+          {/* @ts-ignore Drei wraps UnrealBloomPass */}
+          <unrealBloomPass strength={0.6} radius={0.6} threshold={0.35} />
+        </Effects>
+      </Canvas>
+
+      {/* Overlay label (optional) */}
+      <div className="pointer-events-none absolute bottom-4 left-4 text-cyan-200/80 text-xs tracking-widest">
+        AI/ML Particle Network
       </div>
     </div>
   );
-};
+}
+
   
   // Navigation
   const Navigation = () => (
