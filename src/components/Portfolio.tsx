@@ -1095,52 +1095,52 @@ const Portfolio = () => {
 
 // Certificates Section
  // Enhanced certificate handling with path verification
-  const CertificatesSection = () => {
-    const [selectedCert, setSelectedCert] = useState(null);
-    const [activeTab, setActiveTab] = useState('Programming & Development');
-    const [certErrors, setCertErrors] = useState(new Set());
+const CertificatesSection = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [activeTab, setActiveTab] = useState('Programming & Development');
+  const [certErrors, setCertErrors] = useState(new Set());
+  
+  const certificateData = {
+    'Programming & Development': [
+      { title: 'Programming in Python', year: '2025', file: '/Programming-in-Python.pdf', icon: '🐍' },
+      { title: 'Java as a Second Language', year: '2025', file: '/Java-as-a-Second-Language.pdf', icon: '☕' },
+      { title: 'CSS', year: '2025', file: '/CSS.pdf', icon: '🎨' },
+      { title: 'React JS', year: '2025', file: '/React-JS.pdf', icon: '⚛️' },
+      { title: 'DSA', year: '2025', file: '/DSA.pdf', icon: '🧮' },
+    ],
     
-    const certificateData = {
-      'Programming & Development': [
-        { title: 'Programming in Python', year: '2025', file: '/Programming-in-Python.pdf', icon: '🐍' },
-        { title: 'Java as a Second Language', year: '2025', file: '/Java-as-a-Second-Language.pdf', icon: '☕' },
-        { title: 'CSS', year: '2025', file: '/CSS.pdf', icon: '🎨' },
-        { title: 'React JS', year: '2025', file: '/React-JS.pdf', icon: '⚛️' },
-        { title: 'DSA', year: '2025', file: '/DSA.pdf', icon: '🧮' },
-      ],
-      
-      'Data Science & AI': [
-        // Keep the certificate subdirectory for these files
-        { title: 'IBM Data Science', year: '2025', file: '/IBM-Data-Science.pdf', icon: '📊' },
-        { title: 'Data Analysis with Python', year: '2025', file: '/Data-Analysis-with-Python.pdf', icon: '🔍' },
-        { title: 'Machine Learning with Python', year: '2025', file: '/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
-        { title: 'Data Science Methodology', year: '2025', file: '//Data-Science-Methodology.pdf', icon: '📈' },
-        { title: 'Data Visualization with Python', year: '2025', file: '//Data-Visualization-with-Python.pdf', icon: '📉' },
-        { title: 'Databases and SQL for Data Science', year: '2025', file: '//Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
-        { title: 'Python for Data Science & AI', year: '2025', file: '//Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
-        { title: 'Python Project for Data Science', year: '2025', file: '//Python-Project-for-Data-Science.pdf', icon: '💼' },
-      ],
-  
-      'Power BI & Analytics': [
-        { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
-        { title: 'Data Analysis with Power BI', year: '2025', file: '/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
-        { title: 'Data Modeling in Power BI', year: '2025', file: '/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
-        { title: 'Creative Design in Power BI', year: '2025', file: '/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
-        { title: 'ETL Data in Power BI', year: '2025', file: '/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
-        { title: 'Preparing Data with Excel', year: '2025', file: '/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
-      ],
-  
-      'Cybersecurity & Career': [
-        { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
-        { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/BCG-Virtual-Internship.pdf', icon: '💼' },
-        { title: 'Lloyds Banking Internship', year: '2025', file: '/Lloyds-Intern.pdf', icon: '🏦' },
-        // These also use the certificate subdirectory
-        { title: 'Data Analyst Career Guide', year: '2025', file: '//Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
-        { title: 'Data Scientist Career Guide', year: '2025', file: '//Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
-        { title: 'Generative AI for Data Science', year: '2025', file: '//Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
-        { title: 'Generative AI for Data Analytics', year: '2025', file: '//Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
-      ]
-    };
+    'Data Science & AI': [
+      // Keep the certificate subdirectory for these files
+      { title: 'IBM Data Science', year: '2025', file: '/IBM-Data-Science.pdf', icon: '📊' },
+      { title: 'Data Analysis with Python', year: '2025', file: '/Data-Analysis-with-Python.pdf', icon: '🔍' },
+      { title: 'Machine Learning with Python', year: '2025', file: '/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
+      { title: 'Data Science Methodology', year: '2025', file: '//Data-Science-Methodology.pdf', icon: '📈' },
+      { title: 'Data Visualization with Python', year: '2025', file: '//Data-Visualization-with-Python.pdf', icon: '📉' },
+      { title: 'Databases and SQL for Data Science', year: '2025', file: '//Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
+      { title: 'Python for Data Science & AI', year: '2025', file: '//Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
+      { title: 'Python Project for Data Science', year: '2025', file: '//Python-Project-for-Data-Science.pdf', icon: '💼' },
+    ],
+
+    'Power BI & Analytics': [
+      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
+      { title: 'Data Analysis with Power BI', year: '2025', file: '/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
+      { title: 'Data Modeling in Power BI', year: '2025', file: '/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
+      { title: 'Creative Design in Power BI', year: '2025', file: '/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
+      { title: 'ETL Data in Power BI', year: '2025', file: '/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
+      { title: 'Preparing Data with Excel', year: '2025', file: '/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
+    ],
+
+    'Cybersecurity & Career': [
+      { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
+      { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/BCG-Virtual-Internship.pdf', icon: '💼' },
+      { title: 'Lloyds Banking Internship', year: '2025', file: '/Lloyds-Intern.pdf', icon: '🏦' },
+      // These also use the certificate subdirectory
+      { title: 'Data Analyst Career Guide', year: '2025', file: '//Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
+      { title: 'Data Scientist Career Guide', year: '2025', file: '//Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
+      { title: 'Generative AI for Data Science', year: '2025', file: '//Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
+      { title: 'Generative AI for Data Analytics', year: '2025', file: '//Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
+    ]
+  };
 
   // Function to verify certificate exists before opening
   const handleCertificateClick = async (certFile) => {
