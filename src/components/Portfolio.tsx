@@ -1126,7 +1126,7 @@ const certificateData = {
       { title: 'Data Analysis with Power BI', year: '2025', file: 'https://drive.google.com/file/d/1lRRD3vlOjhriDyy-HXMsm4F1mY5UGjpF/preview', icon: '📈' },
       { title: 'Data Modeling in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1j_yjh6eKW7wbjo4N1x4Xo3HTzdq3YIzY/preview', icon: '🏗️' },
       { title: 'Creative Design in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1HJp9W4G8JTLL3tBmOIDFBFDWMAtzlMzw/preview', icon: '🎨' },
-      { title: 'ETL Data in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1GX6FYvIprNfmczKMZurOu0lTrQdlgv8h/preview, icon: '⚙️' },
+      { title: 'ETL Data in Power BI', year: '2025', file: 'https://drive.google.com/file/d/1GX6FYvIprNfmczKMZurOu0lTrQdlgv8h/preview', icon: '⚙️' },
       { title: 'Preparing Data with Excel', year: '2025', file: 'https://drive.google.com/file/d/18M9mlne1kefVpGNN4GZownZbDTO5Nv-u/preview', icon: '📋' },
     ],
 
