@@ -28,7 +28,7 @@ import {
 import { ModernLoader, LoaderType } from './loaders/LoaderComponents';
 import { LOADER_CONFIG } from './loaders/LoaderConfig';
 import SkillsRadar from '../widgets/SkillsRadar';
-import AIMLParticleNetwork from "./sections/AIMLParticleNetwork";
+import AIMLParticleNetwork from './sections/AIMLParticleNetwork';
 import ProjectFilter from '../widgets/ProjectFilter';
 
 // Simple Modal Component
