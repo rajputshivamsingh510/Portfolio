@@ -1135,10 +1135,9 @@ const certificateData = {
       { title: 'BCG Virtual Data Science Internship', year: '2025', file: 'https://drive.google.com/file/d/1Mm6Qh031MTF_X0l8paPGEdizFCevM-Zw/preview', icon: '💼' },
       { title: 'Lloyds Banking Internship', year: '2025', file: 'https://drive.google.com/file/d/1ll2BQVYbu7juJswatnttpczIP4dIVJdY/preview', icon: '🏦' },
       // These also use the certificate subdirectory
-      { title: 'Data Analyst Career Guide', year: '2025', file: '/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
-      { title: 'Data Scientist Career Guide', year: '2025', file: '/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
-      { title: 'Generative AI for Data Science', year: '2025', file: '/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
-      { title: 'Generative AI for Data Analytics', year: '2025', file: '/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
+
+      { title: 'Generative AI for Data Science', year: '2025', file: 'https://drive.google.com/file/d/1hz_3dfYZ8GnInDqdpiY7O2xlZoKqCCBl/preview', icon: '🤖' },
+      { title: 'Generative AI for Data Analytics', year: '2025', file: 'https://drive.google.com/file/d/1uEXC1Jt24oHk83SmFsTlUDwWsopT1vZ3/preview', icon: '✨' },
     ]
   };
 
