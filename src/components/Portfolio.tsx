@@ -1589,5 +1589,5 @@ const CertificatesSection = ({ certificatesRef, darkMode }) => {
     </div>
   );
 };
-
+};
 export default Portfolio;
