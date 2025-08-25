@@ -263,6 +263,155 @@ const Portfolio = () => {
       </motion.div>
     );
   };
+  
+    // AI-Powered Interactive Widget Component
+  const AIWidget = () => {
+    const [activeNode, setActiveNode] = useState(0);
+    const [brainWaves, setBrainWaves] = useState([]);
+    
+    const aiNodes = [
+      { name: 'Neural Networks', color: 'from-blue-400 to-cyan-400', icon: '🧠' },
+      { name: 'Deep Learning', color: 'from-purple-400 to-pink-400', icon: '🔮' },
+      { name: 'Machine Learning', color: 'from-green-400 to-teal-400', icon: '⚙️' },
+      { name: 'Data Science', color: 'from-orange-400 to-red-400', icon: '📊' },
+      { name: 'Python Dev', color: 'from-yellow-400 to-orange-400', icon: '🐍' }
+    ];
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setActiveNode((prev) => (prev + 1) % aiNodes.length);
+        setBrainWaves(prev => [...prev.slice(-20), Math.random()]);
+      }, 2000);
+      
+      return () => clearInterval(interval);
+    }, []);
+
+    return (
+      <div className="relative w-80 h-80 mx-auto">
+        {/* Central AI Core */}
+        <motion.div 
+          className={`absolute inset-16 rounded-full bg-gradient-to-r ${aiNodes[activeNode].color} opacity-20 blur-xl`}
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+        
+        <motion.div 
+          className={`absolute inset-20 rounded-full bg-gradient-to-r ${aiNodes[activeNode].color} flex items-center justify-center border-2 border-white/20 backdrop-blur-sm`}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <motion.div
+            key={activeNode}
+            className="text-4xl"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.5, type: "spring" }}
+          >
+            {aiNodes[activeNode].icon}
+          </motion.div>
+        </motion.div>
+
+        {/* Orbiting Skill Nodes */}
+        {aiNodes.map((node, index) => {
+          const angle = (index * 72) * Math.PI / 180;
+          const radius = 120;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          
+          return (
+            <motion.div
+              key={node.name}
+              className={`absolute w-12 h-12 rounded-full bg-gradient-to-r ${node.color} flex items-center justify-center text-sm font-bold text-white shadow-lg border-2 ${
+                activeNode === index ? 'border-white scale-110' : 'border-white/40'
+              } cursor-pointer`}
+              style={{
+                left: '50%',
+                top: '50%',
+                transform: `translate(${x - 24}px, ${y - 24}px)`
+              }}
+              animate={{
+                scale: activeNode === index ? 1.1 : 0.9,
+                boxShadow: activeNode === index ? '0 0 20px rgba(255,255,255,0.5)' : '0 0 0px rgba(255,255,255,0)'
+              }}
+              whileHover={{ scale: 1.2, y: -5 }}
+              onClick={() => setActiveNode(index)}
+            >
+              <span className="text-xs">{node.name.split(' ')[0]}</span>
+            </motion.div>
+          );
+        })}
+
+        {/* Connecting Lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {aiNodes.map((_, index) => {
+            const angle = (index * 72) * Math.PI / 180;
+            const radius = 120;
+            const x = Math.cos(angle) * radius + 160;
+            const y = Math.sin(angle) * radius + 160;
+            
+            return (
+              <motion.line
+                key={index}
+                x1="160" y1="160"
+                x2={x} y2={y}
+                stroke={activeNode === index ? '#60A5FA' : '#374151'}
+                strokeWidth={activeNode === index ? "2" : "1"}
+                opacity={activeNode === index ? 0.8 : 0.3}
+                animate={{
+                  strokeDasharray: activeNode === index ? "5,5" : "none",
+                  strokeDashoffset: activeNode === index ? [0, -10] : 0
+                }}
+                transition={{ 
+                  strokeDashoffset: { duration: 1, repeat: Infinity, ease: "linear" }
+                }}
+              />
+            );
+          })}
+        </svg>
+
+        {/* Data Flow Animation */}
+        <div className="absolute inset-0 overflow-hidden rounded-full">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400 rounded-full"
+              animate={{
+                pathLength: [0, 1],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.4,
+                ease: "easeInOut"
+              }}
+              style={{
+                left: `${20 + Math.sin(i * 45 * Math.PI / 180) * 60}%`,
+                top: `${20 + Math.cos(i * 45 * Math.PI / 180) * 60}%`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Active Skill Display */}
+        <motion.div
+          className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center"
+          key={activeNode}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+        >
+          <span className={`text-sm font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+            {aiNodes[activeNode].name}
+          </span>
+        </motion.div>
+      </div>
+    );
+  };
 
   // Navigation
   const Navigation = () => (
@@ -329,104 +478,204 @@ const Portfolio = () => {
     </motion.nav>
   );
 
-  // Hero Section
-  const HeroSection = () => (
-    <section
-      ref={heroRef}
-      id="hero"
-      className={`min-h-screen flex items-center justify-center relative overflow-hidden pb-16 ${
-        darkMode
-          ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900'
-          : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
-      }`}
-    >
-      <ParticleBackground />
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h1
-            className={`text-5xl md:text-7xl font-bold mb-6 ${
-              darkMode ? 'text-white' : 'text-gray-900'
-            }`}
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Shivam Singh
-          </motion.h1>
-
-          <motion.p
-            className={`text-xl md:text-2xl mb-4 ${
-              darkMode ? 'text-blue-400' : 'text-blue-600'
-            } font-semibold`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            AI/ML Engineer | Data Scientist | Python Developer
-          </motion.p>
-
-          <motion.p
-            className={`text-lg mb-8 ${
-              darkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-          >
-            Turning Data into Intelligent Solutions
-          </motion.p>
-
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              onClick={handleResumeDownload}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Download size={20} />
-              <span>Download Resume</span>
-            </motion.button>
-
-           <motion.button
-            onClick={() => contactRef.current.scrollIntoView({ behavior: 'smooth' })}
-            className={`border-2 ${
-              darkMode
-                ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
-                : 'border-blue-600 text-blue-600 hover:bg-blue-600'
-            } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Mail size={20} />
-            <span>Contact Me</span>
-          </motion.button>
-
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Down Arrow */}
-      <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+   // Hero Section
+    const HeroSection = () => (
+      <section
+        ref={heroRef}
+        id="hero"
+        className={`min-h-screen flex items-center justify-center relative overflow-hidden pb-16 ${
+          darkMode
+            ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900'
+            : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+        }`}
       >
-        <ChevronDown
-          size={32}
-          className={darkMode ? 'text-white' : 'text-gray-900'}
-        />
-      </motion.div>
-    </section>
-  );
+        <ParticleBackground />
+  
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Side - AI Widget */}
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0, x: -100, rotateY: -30 }}
+              animate={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+            >
+              <AIWidget />
+            </motion.div>
+  
+            {/* Right Side - Content */}
+            <motion.div
+              className="text-center md:text-left"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <motion.div
+                className="mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.span
+                  className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
+                    darkMode ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-800'
+                  } mb-4`}
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  🚀 Available for AI/ML Projects
+                </motion.span>
+              </motion.div>
+  
+              <motion.h1
+                className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                } leading-tight`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <motion.span
+                  className="block"
+                  animate={{ 
+                    backgroundPosition: ['0%', '100%'],
+                  }}
+                  style={{
+                    background: `linear-gradient(45deg, ${darkMode ? '#3B82F6, #8B5CF6, #3B82F6' : '#2563EB, #7C3AED, #2563EB'})`,
+                    backgroundSize: '200% 200%',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                >
+                  Shivam Singh
+                </motion.span>
+              </motion.h1>
+  
+              <motion.div
+                className="space-y-3 mb-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                <motion.p
+                  className={`text-xl md:text-2xl font-semibold ${
+                    darkMode ? 'text-blue-400' : 'text-blue-600'
+                  }`}
+                >
+                  AI/ML Engineer | Data Scientist
+                </motion.p>
+  
+                <motion.p
+                  className={`text-lg ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                  } max-w-md mx-auto md:mx-0`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.1 }}
+                >
+                  Transforming Complex Data into Intelligent Solutions with 
+                  <motion.span 
+                    className={`font-semibold ${darkMode ? 'text-purple-400' : 'text-purple-600'}`}
+                    animate={{ color: ['#8B5CF6', '#3B82F6', '#8B5CF6'] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    {' '}Machine Learning
+                  </motion.span>
+                </motion.p>
+              </motion.div>
+  
+              {/* Buttons */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3 }}
+              >
+                <motion.button
+                  onClick={handleResumeDownload}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 shadow-lg"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Download size={20} />
+                  <span>Download Resume</span>
+                </motion.button>
+  
+                <motion.button
+                  onClick={() => {
+                    const contactElement = document.getElementById('contact');
+                    if (contactElement) {
+                      contactElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className={`border-2 ${
+                    darkMode
+                      ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
+                      : 'border-blue-600 text-blue-600 hover:bg-blue-600'
+                  } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Mail size={20} />
+                  <span>Contact Me</span>
+                </motion.button>
+              </motion.div>
+  
+              {/* Stats */}
+              <motion.div
+                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-700/30"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+              >
+                {[
+                  { number: '25+', label: 'Projects' },
+                  { number: '15+', label: 'Certifications' },
+                  { number: '2+', label: 'Years Experience' }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="text-center"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 1.7 + index * 0.1, type: "spring" }}
+                  >
+                    <motion.div
+                      className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}
+                      animate={{ color: [darkMode ? '#FFFFFF' : '#1F2937', darkMode ? '#60A5FA' : '#3B82F6', darkMode ? '#FFFFFF' : '#1F2937'] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+  
+        {/* Down Arrow */}
+        <motion.div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown
+            size={32}
+            className={darkMode ? 'text-white' : 'text-gray-900'}
+          />
+        </motion.div>
+      </section>
+    );
 
   // About Section
   const AboutSection = () => (
