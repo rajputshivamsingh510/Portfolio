@@ -1094,129 +1094,221 @@ const Portfolio = () => {
   };
 
 // Certificates Section
-  const CertificatesSection = () => {
-    const [selectedCert, setSelectedCert] = useState(null);
-    const [activeTab, setActiveTab] = useState('Programming & Development');
+ // Enhanced certificate handling with path verification
+const CertificatesSection = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [activeTab, setActiveTab] = useState('Programming & Development');
+  const [certErrors, setCertErrors] = useState(new Set());
+  
+  const certificateData = {
+    'Programming & Development': [
+      { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf', icon: '🐍' },
+      { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf', icon: '☕' },
+      { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf', icon: '🎨' },
+      { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf', icon: '⚛️' },
+      { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf', icon: '🧮' },
+    ],
     
-    const certificateData = {
-      'Programming & Development': [
-        { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf', icon: '🐍' },
-        { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf', icon: '☕' },
-        { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf', icon: '🎨' },
-        { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf', icon: '⚛️' },
-        { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf', icon: '🧮' },
-      ],
-      
-      'Data Science & AI': [
-        { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf', icon: '📊' },
-        { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf', icon: '🔍' },
-        { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
-        { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf', icon: '📈' },
-        { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf', icon: '📉' },
-        { title: 'Databases and SQL for Data Science', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
-        { title: 'Python for Data Science & AI', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
-        { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf', icon: '💼' },
-      ],
+    'Data Science & AI': [
+      // Keep the certificate subdirectory for these files
+      { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf', icon: '📊' },
+      { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf', icon: '🔍' },
+      { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
+      { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf', icon: '📈' },
+      { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf', icon: '📉' },
+      { title: 'Databases and SQL for Data Science', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
+      { title: 'Python for Data Science & AI', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
+      { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf', icon: '💼' },
+    ],
 
-      'Power BI & Analytics': [
-        { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
-        { title: 'Data Analysis with Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
-        { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
-        { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
-        { title: 'ETL Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
-        { title: 'Preparing Data with Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
-      ],
+    'Power BI & Analytics': [
+      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
+      { title: 'Data Analysis with Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
+      { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
+      { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
+      { title: 'ETL Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
+      { title: 'Preparing Data with Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
+    ],
 
-      'Cybersecurity & Career': [
-        { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
-        { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf', icon: '💼' },
-        { title: 'Lloyds Banking Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf', icon: '🏦' },
-        { title: 'Data Analyst Career Guide', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
-        { title: 'Data Scientist Career Guide', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
-        { title: 'Generative AI for Data Science', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
-        { title: 'Generative AI for Data Analytics', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
-      ]
-    };
+    'Cybersecurity & Career': [
+      { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
+      { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf', icon: '💼' },
+      { title: 'Lloyds Banking Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf', icon: '🏦' },
+      // These also use the certificate subdirectory
+      { title: 'Data Analyst Career Guide', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
+      { title: 'Data Scientist Career Guide', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
+      { title: 'Generative AI for Data Science', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
+      { title: 'Generative AI for Data Analytics', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
+    ]
+  };
+
+  // Function to verify certificate exists before opening
+  const handleCertificateClick = async (certFile) => {
+    try {
+      const response = await fetch(certFile, { method: 'HEAD' });
+      if (response.ok) {
+        setSelectedCert(certFile);
+      } else {
+        setCertErrors(prev => new Set([...prev, certFile]));
+        alert(`Certificate not found: ${certFile.split('/').pop()}\nPlease check if the file exists in the correct location.`);
+      }
+    } catch (error) {
+      setCertErrors(prev => new Set([...prev, certFile]));
+      alert(`Error loading certificate: ${certFile.split('/').pop()}`);
+    }
+  };
+
+  // Enhanced Certificate Modal with better error handling
+  const CertificateModal = ({ certificateFile, onClose }) => {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     return (
-      <section 
-        ref={certificatesRef}
-        className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`} 
-        id="certificates"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            className={`text-4xl font-bold text-center mb-16 ${darkMode ? 'text-white' : 'text-gray-900'}`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+        <div className="relative max-w-4xl max-h-[90vh] w-full mx-4 bg-white rounded-lg overflow-hidden">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
           >
-            Certifications & Achievements
-          </motion.h2>
-
-          {/* Tab Navigation */}
-          <div className="flex flex-wrap justify-center mb-12 gap-2">
-            {Object.keys(certificateData).map((tab) => (
-              <motion.button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeTab === tab
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : darkMode
-                    ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {tab}
-              </motion.button>
-            ))}
+            <X size={20} />
+          </button>
+          
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-lg z-5">
+              <div className="flex flex-col items-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+                <div className="text-gray-600">Loading certificate...</div>
+              </div>
+            </div>
+          )}
+          
+          {error ? (
+            <div className="flex flex-col items-center justify-center h-96 bg-gray-100 rounded-lg p-8">
+              <div className="text-red-500 mb-4 text-6xl">📄</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Certificate Not Available</h3>
+              <p className="text-gray-600 text-center mb-4">
+                The certificate file could not be loaded.
+              </p>
+              <p className="text-sm text-gray-500 font-mono bg-gray-200 px-3 py-1 rounded">
+                {certificateFile}
+              </p>
+            </div>
+          ) : (
+            <iframe
+              src={certificateFile}
+              className="w-full h-[80vh] rounded-lg"
+              title="Certificate Viewer"
+              onLoad={() => setLoading(false)}
+              onError={() => {
+                setLoading(false);
+                setError(true);
+              }}
+            />
+          )}
+          
+          <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-lg text-sm">
+            Certificate Preview
           </div>
+        </div>
+      </div>
+    );
+  };
 
-          {/* Certificates Grid */}
-          <motion.div 
-            key={activeTab}
-            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {certificateData[activeTab].map((cert, index) => (
+  return (
+    <section 
+      ref={certificatesRef}
+      className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`} 
+      id="certificates"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          className={`text-4xl font-bold text-center mb-16 ${darkMode ? 'text-white' : 'text-gray-900'}`}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Certifications & Achievements
+        </motion.h2>
+
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap justify-center mb-12 gap-2">
+          {Object.keys(certificateData).map((tab) => (
+            <motion.button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                activeTab === tab
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : darkMode
+                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {tab}
+            </motion.button>
+          ))}
+        </div>
+
+        {/* Certificates Grid */}
+        <motion.div 
+          key={activeTab}
+          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {certificateData[activeTab].map((cert, index) => {
+            const hasError = certErrors.has(cert.file);
+            
+            return (
               <motion.div
                 key={cert.title}
                 className={`group cursor-pointer p-6 rounded-xl ${
-                  darkMode 
+                  hasError 
+                    ? 'bg-red-50 border border-red-200' 
+                    : darkMode 
                     ? 'bg-gray-900 border border-gray-700 hover:border-blue-500' 
                     : 'bg-white border border-gray-200 hover:border-blue-400'
-                } shadow-lg transition-all duration-300 h-48 flex flex-col justify-between`}
+                } shadow-lg transition-all duration-300 h-48 flex flex-col justify-between ${
+                  hasError ? 'opacity-60' : ''
+                }`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{
-                  scale: 1.05,
-                  y: -5,
-                  boxShadow: darkMode
+                  scale: hasError ? 1 : 1.05,
+                  y: hasError ? 0 : -5,
+                  boxShadow: hasError ? undefined : darkMode
                     ? '0 20px 40px rgba(59, 130, 246, 0.2)'
                     : '0 20px 40px rgba(0, 0, 0, 0.1)',
                 }}
-                onClick={() => setSelectedCert(cert.file)}
+                onClick={() => handleCertificateClick(cert.file)}
               >
                 <div className="text-center">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                    {cert.icon}
+                  <div className={`text-4xl mb-3 transition-transform duration-300 ${
+                    hasError ? '' : 'group-hover:scale-110'
+                  }`}>
+                    {hasError ? '❌' : cert.icon}
                   </div>
                   <h4 className={`font-bold text-sm mb-2 line-clamp-2 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
+                    hasError 
+                      ? 'text-red-600' 
+                      : darkMode 
+                      ? 'text-white' 
+                      : 'text-gray-900'
                   }`}>
                     {cert.title}
+                    {hasError && <div className="text-xs text-red-500 mt-1">File not found</div>}
                   </h4>
                 </div>
                 
                 <div className="text-center">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                    darkMode 
+                    hasError 
+                      ? 'bg-red-100 text-red-800'
+                      : darkMode 
                       ? 'bg-blue-600/20 text-blue-400' 
                       : 'bg-blue-100 text-blue-800'
                   }`}>
@@ -1224,36 +1316,31 @@ const Portfolio = () => {
                   </span>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
+            );
+          })}
+        </motion.div>
 
-          {/* Certificate Count Display */}
-          <div className="text-center mt-8">
-            <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <span className="font-bold text-blue-500">{certificateData[activeTab].length}</span> certificates in {activeTab}
-            </p>
-          </div>
-
-          {/* Certificate Modal */}
-          {selectedCert && (
-            <Modal onClose={() => setSelectedCert(null)}>
-              <div className="relative">
-                <iframe
-                  src={selectedCert}
-                  className="w-full h-[80vh] rounded-lg"
-                  title="Certificate Viewer"
-                />
-                <div className="absolute top-4 left-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-lg text-sm">
-                  Certificate Preview
-                </div>
-              </div>
-            </Modal>
-          )}
+        {/* Certificate Count Display */}
+        <div className="text-center mt-8">
+          <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <span className="font-bold text-blue-500">{certificateData[activeTab].length}</span> certificates in {activeTab}
+            {certErrors.size > 0 && (
+              <span className="text-red-500 ml-2">({certErrors.size} files missing)</span>
+            )}
+          </p>
         </div>
-      </section>
-    );
-  }; 
-  
+
+        {/* Certificate Modal */}
+        {selectedCert && (
+          <CertificateModal
+            certificateFile={selectedCert}
+            onClose={() => setSelectedCert(null)}
+          />
+        )}
+      </div>
+    </section>
+  );
+};  
   // Contact Section
   const ContactSection = () => {
     const [formData, setFormData] = useState({
