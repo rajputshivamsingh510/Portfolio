@@ -1549,5 +1549,4 @@ const CertificatesSection = () => {
     </div>
   );
 };
-};
 export default Portfolio;
