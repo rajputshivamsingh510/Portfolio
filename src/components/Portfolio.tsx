@@ -1103,7 +1103,7 @@ const CertificatesSection = () => {
 const certificateData = { 
   
   'Programming & Development': [ 
-    { title: 'Programming in Python', year: '2025', file: '[https://drive.google.com/file/d/1sdGupfaClD0BLwKzxJ8tYrIrag1QIxkY/preview', icon: '🐍' }, 
+    { title: 'Programming in Python', year: '2025', file: 'https://drive.google.com/file/d/1sdGupfaClD0BLwKzxJ8tYrIrag1QIxkY/preview', icon: '🐍' }, 
     { title: 'Java as a Second Language', year: '2025', file: 'https://drive.google.com/file/d/1eWx4ZFrpRyaS1wEqOmHOtjxGV9egl_Dr/preview', icon: '☕' }, 
     { title: 'CSS', year: '2025', file:  'https://drive.google.com/file/d/1Jm9-f6iOv9eRP_xHO8WPKl7hERxOii3o/preview', icon: '🎨' }, 
     { title: 'React JS', year: '2025', file: 'https://drive.google.com/file/d/10dbIKH-BX1XoJpVBlnY5GbNBK0vHyGt4/preview', icon: '⚛️' }, 
@@ -1111,14 +1111,14 @@ const certificateData = {
     
     'Data Science & AI': [
       // Keep the certificate subdirectory for these files
-      { title: 'IBM Data Science', year: '2025', file: '/IBM-Data-Science.pdf', icon: '📊' },
-      { title: 'Data Analysis with Python', year: '2025', file: '/Data-Analysis-with-Python.pdf', icon: '🔍' },
-      { title: 'Machine Learning with Python', year: '2025', file: '/Machine-Learning-with-Python.pdf', icon: '🤖' },
-      { title: 'Data Science Methodology', year: '2025', file: '/Data-Science-Methodology.pdf', icon: '📈' },
-      { title: 'Data Visualization with Python', year: '2025', file: '/Data-Visualization-with-Python.pdf', icon: '📉' },
-      { title: 'Databases and SQL for Data Science', year: '2025', file: '/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
-      { title: 'Python for Data Science & AI', year: '2025', file: '/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
-      { title: 'Python Project for Data Science', year: '2025', file: '/Python-Project-for-Data-Science.pdf', icon: '💼' },
+      { title: 'IBM Data Science', year: '2025', file: 'https://drive.google.com/file/d/19tQytxT-y38bqb_xXMjjRI5rwDSMyYgm/preview', icon: '📊' },
+      { title: 'Data Analysis with Python', year: '2025', file: 'https://drive.google.com/file/d/1mktcdUnQBbAXYWjf2k4pbDV8eKpSrTVT/preview', icon: '🔍' },
+      { title: 'Machine Learning with Python', year: '2025', file: 'https://drive.google.com/file/d/1J0zJiknKpZ1BQyF_9Tqy3nwfMcVM1fRL/preview', icon: '🤖' },
+      { title: 'Data Science Methodology', year: '2025', file: 'https://drive.google.com/file/d/1Gxj-FyaAat_fOwzG8nuXVdrP4cr_zi_A/preview', icon: '📈' },
+      { title: 'Data Visualization with Python', year: '2025', file: 'https://drive.google.com/file/d/1VOqE4BtC8eh9awU2Gh6uxeseK1i0Itdb/preview', icon: '📉' },
+      { title: 'Databases and SQL for Data Science', year: '2025', file: 'https://drive.google.com/file/d/1Xu1hWcLBN_URHgkfcTkoVRendG2d_6kF/preview', icon: '🗄️' },
+      { title: 'Python for Data Science & AI', year: '2025', file: 'https://drive.google.com/file/d/1kzxj0M1BwKOiBcJMNT5xIg-k8ewTqmL-/preview', icon: '🧠' },
+      { title: 'Python Project for Data Science', year: '2025', file: 'https://drive.google.com/file/d/1DOioz8mecXGaND2BpXfW8S4Si1LC0ph4/preview', icon: '💼' },
     ],
 
     'Power BI & Analytics': [
