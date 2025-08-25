@@ -1157,46 +1157,6 @@ const CertificatesSection = () => {
       alert(`Error loading certificate: ${certFile.split('/').pop()}`);
     }
   };
-//certificate section
-const CertificatesSection = ({ certificatesRef, darkMode }) => {
-  const [selectedCert, setSelectedCert] = useState(null);
-  const [activeTab, setActiveTab] = useState('Programming & Development');
-  const certificateData = {
-    'Programming & Development': [
-      { title: 'Programming in Python', year: '2025', file: '/certificates/Programming-in-Python.pdf', icon: '🐍' },
-      { title: 'Java as a Second Language', year: '2025', file: '/certificates/Java-as-a-Second-Language.pdf', icon: '☕' },
-      { title: 'CSS', year: '2025', file: '/certificates/CSS.pdf', icon: '🎨' },
-      { title: 'React JS', year: '2025', file: '/certificates/React-JS.pdf', icon: '⚛️' },
-      { title: 'DSA', year: '2025', file: '/certificates/DSA.pdf', icon: '🧮' },
-    ],
-    'Data Science & AI': [
-      { title: 'IBM Data Science', year: '2025', file: '/certificates/certificate/IBM-Data-Science.pdf', icon: '📊' },
-      { title: 'Data Analysis with Python', year: '2025', file: '/certificates/certificate/Data-Analysis-with-Python.pdf', icon: '🔍' },
-      { title: 'Machine Learning with Python', year: '2025', file: '/certificates/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
-      { title: 'Data Science Methodology', year: '2025', file: '/certificates/certificate/Data-Science-Methodology.pdf', icon: '📈' },
-      { title: 'Data Visualization with Python', year: '2025', file: '/certificates/certificate/Data-Visualization-with-Python.pdf', icon: '📉' },
-      { title: 'Databases and SQL for Data Science', year: '2025', file: '/certificates/certificate/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
-      { title: 'Python for Data Science & AI', year: '2025', file: '/certificates/certificate/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
-      { title: 'Python Project for Data Science', year: '2025', file: '/certificates/certificate/Python-Project-for-Data-Science.pdf', icon: '💼' },
-    ],
-    'Power BI & Analytics': [
-      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/certificates/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
-      { title: 'Data Analysis with Power BI', year: '2025', file: '/certificates/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
-      { title: 'Data Modeling in Power BI', year: '2025', file: '/certificates/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
-      { title: 'Creative Design in Power BI', year: '2025', file: '/certificates/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
-      { title: 'ETL Data in Power BI', year: '2025', file: '/certificates/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
-      { title: 'Preparing Data with Excel', year: '2025', file: '/certificates/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
-    ],
-    'Cybersecurity & Career': [
-      { title: 'Automate Cybersecurity Tasks', year: '2025', file: '/certificates/Automate-Cybersecurity-Tasks-with-Python.pdf', icon: '🔐' },
-      { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/certificates/BCG-Virtual-Internship.pdf', icon: '💼' },
-      { title: 'Lloyds Banking Internship', year: '2025', file: '/certificates/Lloyds-Intern.pdf', icon: '🏦' },
-      { title: 'Data Analyst Career Guide', year: '2025', file: '/certificates/certificate/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
-      { title: 'Data Scientist Career Guide', year: '2025', file: '/certificates/certificate/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
-      { title: 'Generative AI for Data Science', year: '2025', file: '/certificates/certificate/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
-      { title: 'Generative AI for Data Analytics', year: '2025', file: '/certificates/certificate/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
-    ]
-  };
 
   return (
     <section ref={certificatesRef} className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`} id="certificates">
