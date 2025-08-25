@@ -1100,14 +1100,14 @@ const CertificatesSection = () => {
   const [activeTab, setActiveTab] = useState('Programming & Development');
   const [certErrors, setCertErrors] = useState(new Set());
   
-  const certificateData = {
-    'Programming & Development': [
-      { title: 'Programming in Python', year: '2025', file: 'https://raw.githubusercontent.com/yourusername/repo/main/Programming-in-Python.pdf', icon: '🐍' },
-      { title: 'Java as a Second Language', year: '2025', file: 'https://raw.githubusercontent.com/yourusername/repo/main/Java-as-a-Second-Language.pdf', icon: '☕' },
-      { title: 'CSS', year: '2025', file: 'https://raw.githubusercontent.com/yourusername/repo/main/CSS.pdf', icon: '🎨' },
-      { title: 'React JS', year: '2025', file: 'https://raw.githubusercontent.com/yourusername/repo/main/React-JS.pdf', icon: '⚛️' },
-      { title: 'DSA', year: '2025', file: 'https://raw.githubusercontent.com/yourusername/repo/main/DSA.pdf', icon: '🧮' },
-    ],
+const certificateData = { 
+  
+  'Programming & Development': [ 
+    { title: 'Programming in Python', year: '2025', file: '/Programming-in-Python.pdf', icon: '🐍' }, 
+    { title: 'Java as a Second Language', year: '2025', file: '/Java-as-a-Second-Language.pdf', icon: '☕' }, 
+    { title: 'CSS', year: '2025', file: '/CSS.pdf', icon: '🎨' }, 
+    { title: 'React JS', year: '2025', file: '/React-JS.pdf', icon: '⚛️' }, 
+    { title: 'DSA', year: '2025', file: '/DSA.pdf', icon: '🧮' }, ],
     
     'Data Science & AI': [
       // Keep the certificate subdirectory for these files
