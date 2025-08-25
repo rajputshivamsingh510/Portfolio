@@ -1113,21 +1113,21 @@ const CertificatesSection = () => {
       // Keep the certificate subdirectory for these files
       { title: 'IBM Data Science', year: '2025', file: '/IBM-Data-Science.pdf', icon: '📊' },
       { title: 'Data Analysis with Python', year: '2025', file: '/Data-Analysis-with-Python.pdf', icon: '🔍' },
-      { title: 'Machine Learning with Python', year: '2025', file: '/certificate/Machine-Learning-with-Python.pdf', icon: '🤖' },
-      { title: 'Data Science Methodology', year: '2025', file: '//Data-Science-Methodology.pdf', icon: '📈' },
-      { title: 'Data Visualization with Python', year: '2025', file: '//Data-Visualization-with-Python.pdf', icon: '📉' },
-      { title: 'Databases and SQL for Data Science', year: '2025', file: '//Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
-      { title: 'Python for Data Science & AI', year: '2025', file: '//Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
-      { title: 'Python Project for Data Science', year: '2025', file: '//Python-Project-for-Data-Science.pdf', icon: '💼' },
+      { title: 'Machine Learning with Python', year: '2025', file: '/Machine-Learning-with-Python.pdf', icon: '🤖' },
+      { title: 'Data Science Methodology', year: '2025', file: '/Data-Science-Methodology.pdf', icon: '📈' },
+      { title: 'Data Visualization with Python', year: '2025', file: '/Data-Visualization-with-Python.pdf', icon: '📉' },
+      { title: 'Databases and SQL for Data Science', year: '2025', file: '/Databases-and-SQL-for-Data-Science-with-Python.pdf', icon: '🗄️' },
+      { title: 'Python for Data Science & AI', year: '2025', file: '/Python-for-Data-Science-AI-and-Development.pdf', icon: '🧠' },
+      { title: 'Python Project for Data Science', year: '2025', file: '/Python-Project-for-Data-Science.pdf', icon: '💼' },
     ],
 
     'Power BI & Analytics': [
-      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/PowerBI/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
-      { title: 'Data Analysis with Power BI', year: '2025', file: '/PowerBI/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
-      { title: 'Data Modeling in Power BI', year: '2025', file: '/PowerBI/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
-      { title: 'Creative Design in Power BI', year: '2025', file: '/PowerBI/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
-      { title: 'ETL Data in Power BI', year: '2025', file: '/PowerBI/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
-      { title: 'Preparing Data with Excel', year: '2025', file: '/PowerBI/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
+      { title: 'Microsoft Power BI Data Analyst', year: '2025', file: '/Microsoft-Power-BI-Data-Analyst.pdf', icon: '📊' },
+      { title: 'Data Analysis with Power BI', year: '2025', file: '/Data-Analysis-and-Visualization-using-Power-BI.pdf', icon: '📈' },
+      { title: 'Data Modeling in Power BI', year: '2025', file: '/Data-Modeling-in-Power-BI.pdf', icon: '🏗️' },
+      { title: 'Creative Design in Power BI', year: '2025', file: '/Creative-Design-in-Power-BI.pdf', icon: '🎨' },
+      { title: 'ETL Data in Power BI', year: '2025', file: '/Extract-Transform-and-Load-Data-in-Power-BI.pdf', icon: '⚙️' },
+      { title: 'Preparing Data with Excel', year: '2025', file: '/Preparing-Data-for-Analysis-with-Microsoft-Excel.pdf', icon: '📋' },
     ],
 
     'Cybersecurity & Career': [
@@ -1135,10 +1135,10 @@ const CertificatesSection = () => {
       { title: 'BCG Virtual Data Science Internship', year: '2025', file: '/BCG-Virtual-Internship.pdf', icon: '💼' },
       { title: 'Lloyds Banking Internship', year: '2025', file: '/Lloyds-Intern.pdf', icon: '🏦' },
       // These also use the certificate subdirectory
-      { title: 'Data Analyst Career Guide', year: '2025', file: '//Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
-      { title: 'Data Scientist Career Guide', year: '2025', file: '//Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
-      { title: 'Generative AI for Data Science', year: '2025', file: '//Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
-      { title: 'Generative AI for Data Analytics', year: '2025', file: '//Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
+      { title: 'Data Analyst Career Guide', year: '2025', file: '/Data-Analyst-Career-Guide-and-Interview-Preparation.pdf', icon: '🎯' },
+      { title: 'Data Scientist Career Guide', year: '2025', file: '/Data-Scientist-Career-Guide-and-Interview-Preparation.pdf', icon: '🚀' },
+      { title: 'Generative AI for Data Science', year: '2025', file: '/Generative-AI-Elevate-Your-Data-Science-Career.pdf', icon: '🤖' },
+      { title: 'Generative AI for Data Analytics', year: '2025', file: '/Generative-AI-Enhance-Your-Data-Analytics-Career.pdf', icon: '✨' },
     ]
   };
 
