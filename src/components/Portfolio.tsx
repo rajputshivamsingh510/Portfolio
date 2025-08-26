@@ -403,7 +403,10 @@ const Portfolio = () => {
                 Shivam Singh
               </motion.span>
             </motion.h1>
-  
+            <div className="flex justify-center md:justify-start mt-6">
+              <AIMLParticleNetwork />
+            </div>
+
             <motion.div
               className="space-y-3 mb-8"
               initial={{ opacity: 0 }}
@@ -524,11 +527,6 @@ const Portfolio = () => {
               ))}
             </motion.div>
           </motion.div>
-        </div>
-  
-        {/* AI/ML Particle Network – added below grid as full-width visual */}
-        <div className="mt-16">
-          <AIMLParticleNetwork />
         </div>
       </div>
   
