@@ -330,219 +330,218 @@ const Portfolio = () => {
     </motion.nav>
   );
   
-  //Hero Section
-  const HeroSection = () => (
-    <section
-      ref={heroRef}
-      id="hero"
-      className={`min-h-screen flex items-center justify-center relative overflow-hidden pb-16 ${
-        darkMode
-          ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900'
-          : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
-      }`}
-    >
-     
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Side - AI Data Visualization */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, x: -100, rotateY: -30 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-          </motion.div>
+    //Hero Section
+    const HeroSection = () => (
+      <section
+        ref={heroRef}
+        id="hero"
+        className={`min-h-screen flex items-center justify-center relative overflow-hidden pb-16 ${
+          darkMode
+            ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900'
+            : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+        }`}
+      >
   
-          {/* Right Side - Content */}
-          <motion.div
-            className="text-center md:text-left"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-12 gap-8 items-center">
+            {/* Left Side - Particle */}
             <motion.div
-              className="mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              className="col-span-12 md:col-span-5 flex justify-center md:justify-start"
+              initial={{ opacity: 0, x: -100, rotateY: -500 }}
+              animate={{ opacity: 1, x: -120, rotateY: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
             >
-              <motion.span
-                className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
-                  darkMode ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-800'
-                } mb-4`}
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                🚀 Available for AI/ML Projects
-              </motion.span>
+              <AIMLParticleNetwork />
             </motion.div>
   
-            <motion.h1
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              } leading-tight`}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-            >
-              <motion.span
-                className="block"
-                animate={{ backgroundPosition: ['0%', '100%'] }}
-                style={{
-                  background: `linear-gradient(45deg, ${
-                    darkMode ? '#3B82F6, #8B5CF6, #3B82F6' : '#2563EB, #7C3AED, #2563EB'
-                  })`,
-                  backgroundSize: '200% 200%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-              >
-                Shivam Singh
-              </motion.span>
-            </motion.h1>
-            <div className="flex justify-center md:justify-start mt-6">
-              <AIMLParticleNetwork />
-            </div>
-
+            {/* Right Side - Text */}
             <motion.div
-              className="space-y-3 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
+              className="col-span-12 md:col-span-7 text-left ml-auto md:pl-16"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 100 }}
+              transition={{ duration: 1 }}
             >
-              <motion.p
-                className={`text-xl md:text-2xl font-semibold ${
-                  darkMode ? 'text-blue-400' : 'text-blue-600'
-                }`}
+              <motion.div
+                className="mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
               >
-                AI/ML Engineer | Data Scientist
-              </motion.p>
-  
-              <motion.p
-                className={`text-lg ${
-                  darkMode ? 'text-gray-300' : 'text-gray-600'
-                } max-w-md mx-auto md:mx-0`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1 }}
-              >
-                Transforming Complex Data into Intelligent Solutions with{' '}
                 <motion.span
-                  className={`font-semibold ${
-                    darkMode ? 'text-purple-400' : 'text-purple-600'
-                  }`}
-                  animate={{ color: ['#8B5CF6', '#3B82F6', '#8B5CF6'] }}
+                  className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${
+                    darkMode ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-800'
+                  } mb-4`}
+                  animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  Machine Learning
+                  🚀 Available for AI/ML Projects
                 </motion.span>
-              </motion.p>
-            </motion.div>
+              </motion.div>
   
-            {/* Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 }}
-            >
-              <motion.button
-                onClick={handleResumeDownload}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 shadow-lg"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 20px 40px rgba(59, 130, 246, 0.4)',
-                }}
-                whileTap={{ scale: 0.95 }}
+              <motion.h1
+                className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 ${
+                  darkMode ? 'text-white' : 'text-gray-900'
+                } leading-tight`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
               >
-                <Download size={20} />
-                <span>Download Resume</span>
-              </motion.button>
-  
-              <motion.button
-                onClick={() => {
-                  const contactElement = document.getElementById('contact');
-                  if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className={`border-2 ${
-                  darkMode
-                    ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
-                    : 'border-blue-600 text-blue-600 hover:bg-blue-600'
-                } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Mail size={20} />
-                <span>Contact Me</span>
-              </motion.button>
-            </motion.div>
-  
-            {/* Stats */}
-            <motion.div
-              className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-700/30"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
-            >
-              {[
-                { number: '25+', label: 'Projects' },
-                { number: '15+', label: 'Certifications' },
-                { number: '2+', label: 'Years Experience' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="text-center"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 1.7 + index * 0.1, type: 'spring' }}
+                <motion.span
+                  className="block"
+                  animate={{ backgroundPosition: ['0%', '100%'] }}
+                  style={{
+                    background: `linear-gradient(45deg, ${
+                      darkMode ? '#3B82F6, #8B5CF6, #3B82F6' : '#2563EB, #7C3AED, #2563EB'
+                    })`,
+                    backgroundSize: '200% 200%',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
                 >
-                  <motion.div
-                    className={`text-2xl font-bold ${
-                      darkMode ? 'text-white' : 'text-gray-900'
-                    }`}
-                    animate={{
-                      color: [
-                        darkMode ? '#FFFFFF' : '#1F2937',
-                        darkMode ? '#60A5FA' : '#3B82F6',
-                        darkMode ? '#FFFFFF' : '#1F2937',
-                      ],
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  >
-                    {stat.number}
-                  </motion.div>
-                  <div
-                    className={`text-sm ${
-                      darkMode ? 'text-gray-400' : 'text-gray-600'
-                    }`}
-                  >
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
+                  Shivam Singh
+                </motion.span>
+              </motion.h1>
   
-      {/* Down Arrow */}
-      <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <ChevronDown
-          size={32}
-          className={darkMode ? 'text-white' : 'text-gray-900'}
-        />
-      </motion.div>
-    </section>
-  );
+              <motion.div
+                className="space-y-3 mb-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                <motion.p
+                  className={`text-xl md:text-2xl font-semibold ${
+                    darkMode ? 'text-blue-400' : 'text-blue-600'
+                  }`}
+                >
+                  AI/ML Engineer | Data Scientist
+                </motion.p>
+  
+                <motion.p
+                  className={`text-lg ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                  } max-w-md mx-auto md:mx-0`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.1 }}
+                >
+                  Transforming Complex Data into Intelligent Solutions with{' '}
+                  <motion.span
+                    className={`font-semibold ${
+                      darkMode ? 'text-purple-400' : 'text-purple-600'
+                    }`}
+                    animate={{ color: ['#8B5CF6', '#3B82F6', '#8B5CF6'] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    Machine Learning
+                  </motion.span>
+                </motion.p>
+              </motion.div>
+  
+              {/* Buttons */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3 }}
+              >
+                <motion.button
+                  onClick={handleResumeDownload}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 shadow-lg"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: '0 20px 40px rgba(59, 130, 246, 0.4)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Download size={20} />
+                  <span>Download Resume</span>
+                </motion.button>
+  
+                <motion.button
+                  onClick={() => {
+                    const contactElement = document.getElementById('contact');
+                    if (contactElement) {
+                      contactElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className={`border-2 ${
+                    darkMode
+                      ? 'border-blue-400 text-blue-400 hover:bg-blue-400'
+                      : 'border-blue-600 text-blue-600 hover:bg-blue-600'
+                  } hover:text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-all duration-300`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Mail size={20} />
+                  <span>Contact Me</span>
+                </motion.button>
+              </motion.div>
+  
+              {/* Stats */}
+              <motion.div
+                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-700/30"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+              >
+                {[
+                  { number: '25+', label: 'Projects' },
+                  { number: '15+', label: 'Certifications' },
+                  { number: '2+', label: 'Years Experience' },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="text-center"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 1.7 + index * 0.1, type: 'spring' }}
+                  >
+                    <motion.div
+                      className={`text-2xl font-bold ${
+                        darkMode ? 'text-white' : 'text-gray-900'
+                      }`}
+                      animate={{
+                        color: [
+                          darkMode ? '#FFFFFF' : '#1F2937',
+                          darkMode ? '#60A5FA' : '#3B82F6',
+                          darkMode ? '#FFFFFF' : '#1F2937',
+                        ],
+                      }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <div
+                      className={`text-sm ${
+                        darkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}
+                    >
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+  
+        {/* Down Arrow */}
+        <motion.div
+          className="absolute bottom-4 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <ChevronDown
+            size={32}
+            className={darkMode ? 'text-white' : 'text-gray-900'}
+          />
+        </motion.div>
+      </section>
+    );
+
 
   // About Section
   const AboutSection = () => (
