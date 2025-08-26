@@ -214,7 +214,7 @@ function ParticleNetwork({
 
 export default function AIMLParticleNetwork() {
   return (
-    <div className="relative w-90 h-80 md:w-96 md:h-96"> {/* Larger, responsive container */}
+    <div className="relative w-100 h-100 md:w-100 md:h-100"> {/* Larger, responsive container */}
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 0, 14], fov: 50 }}
