@@ -11,54 +11,60 @@ type NetworkProps = {
 };
 
 function useMouseAttractor() {
-  const { size, viewport, camera } = useThree();
+  const { camera } = useThree();
   const mouse3 = useRef(new THREE.Vector3());
-  
-  const onPointerMove = (e) => {
+
+  const onPointerMove = (e: any) => {
     const rect = e.target.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     const v = new THREE.Vector3(x, y, 0.5).unproject(camera);
     mouse3.current.copy(v);
   };
-  
-  return { mouse3, onPointerMove, viewport };
+
+  return { mouse3, onPointerMove };
 }
 
 function ParticleNetwork({
-  count = 250,
-  radius = 7,
-  linkDistance = 1.4,
-  maxLinksPerNode = 7,
+  count = 280,
+  radius = 10,
+  linkDistance = 1.6,
+  maxLinksPerNode = 6,
 }: NetworkProps) {
-  const group = useRef(null);
-  const pointsRef = useRef(null);
-  const linesRef = useRef(null);
+  const group = useRef<THREE.Group>(null);
+  const pointsRef = useRef<THREE.Points>(null);
+  const linesRef = useRef<THREE.LineSegments>(null);
   const velocities = useRef(
-    Array.from({ length: count }, () => new THREE.Vector3(
-      (Math.random() - 0.5) * 0.003,
-      (Math.random() - 0.5) * 0.003,
-      (Math.random() - 0.5) * 0.003
-    ))
+    Array.from(
+      { length: count },
+      () =>
+        new THREE.Vector3(
+          (Math.random() - 0.5) * 0.003,
+          (Math.random() - 0.5) * 0.003,
+          (Math.random() - 0.5) * 0.003
+        )
+    )
   );
   const { mouse3, onPointerMove } = useMouseAttractor();
   const [hovering, setHovering] = useState(false);
 
-  // Generate initial positions and colors
+  // Particle positions + colors
   const { positions, colors } = useMemo(() => {
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
+
     const colorA = new THREE.Color("#60a5fa");
     const colorB = new THREE.Color("#22d3ee");
     const colorC = new THREE.Color("#8b5cf6");
-    
+
     for (let i = 0; i < count; i++) {
+      // Bias distribution toward center
       const u = Math.random();
       const v = Math.random();
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
-      const r = radius * Math.cbrt(Math.random());
-      
+      const r = radius * Math.pow(Math.random(), 1.5);
+
       pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = r * Math.cos(phi);
@@ -84,14 +90,13 @@ function ParticleNetwork({
 
   useFrame((_, delta) => {
     if (!pointsRef.current || !linesRef.current || !group.current) return;
-    
-    const pts = pointsRef.current.geometry.attributes.position;
-    const arr = pts.array;
 
-    // Gentle auto-rotation with slight variation
-    group.current.rotation.y += delta * 0.12;
-    group.current.rotation.x += delta * 0.025;
-    group.current.rotation.z += delta * 0.01;
+    const pts = pointsRef.current.geometry.attributes.position;
+    const arr = pts.array as Float32Array;
+
+    // Soft auto-rotation
+    group.current.rotation.y += delta * 0.08;
+    group.current.rotation.x += delta * 0.02;
 
     // Particle motion
     for (let i = 0; i < count; i++) {
@@ -103,17 +108,18 @@ function ParticleNetwork({
         const dir = mouse3.current.clone().sub(p);
         const dist = Math.max(dir.length(), 0.0001);
         dir.normalize();
-        const force = Math.min(0.003 / (dist * dist), 0.003);
+        const force = Math.min(0.002 / (dist * dist), 0.002);
         v.addScaledVector(dir, force);
       }
 
-      v.multiplyScalar(0.988);
+      v.multiplyScalar(0.985);
       p.add(v);
 
-      const limit = radius * 1.2;
+      // Keep particles softly within a sphere
+      const limit = radius * 1.4;
       if (p.length() > limit) {
         p.setLength(limit);
-        v.reflect(p.clone().normalize()).multiplyScalar(0.75);
+        v.reflect(p.clone().normalize()).multiplyScalar(0.7);
       }
 
       arr[i3] = p.x;
@@ -125,17 +131,19 @@ function ParticleNetwork({
     // Build dynamic links
     let lineCount = 0;
     const maxDist2 = linkDistance * linkDistance;
-    const stride = count > 220 ? 2 : 1;
-
-    for (let i = 0; i < count; i += 1) {
+    for (let i = 0; i < count; i++) {
       let links = 0;
-      const ix = arr[i * 3], iy = arr[i * 3 + 1], iz = arr[i * 3 + 2];
-      
-      for (let j = i + stride; j < count && links < maxLinksPerNode; j += stride) {
-        const jx = arr[j * 3], jy = arr[j * 3 + 1], jz = arr[j * 3 + 2];
-        const dx = ix - jx, dy = iy - jy, dz = iz - jz;
+      const ix = arr[i * 3],
+        iy = arr[i * 3 + 1],
+        iz = arr[i * 3 + 2];
+      for (let j = i + 1; j < count && links < maxLinksPerNode; j++) {
+        const jx = arr[j * 3],
+          jy = arr[j * 3 + 1],
+          jz = arr[j * 3 + 2];
+        const dx = ix - jx,
+          dy = iy - jy,
+          dz = iz - jz;
         const d2 = dx * dx + dy * dy + dz * dz;
-        
         if (d2 <= maxDist2) {
           const k = lineCount * 6;
           linePositions[k] = ix;
@@ -146,28 +154,26 @@ function ParticleNetwork({
           linePositions[k + 5] = jz;
           lineCount++;
           links++;
-          if (lineCount >= linePositions.length / 6) break;
         }
       }
-      if (lineCount >= linePositions.length / 6) break;
     }
 
     const geo = linesRef.current.geometry;
-    const posAttr = geo.attributes.position;
-    posAttr.array = linePositions;
-    posAttr.needsUpdate = true;
     geo.setDrawRange(0, lineCount * 2);
+    geo.attributes.position.needsUpdate = true;
   });
 
   return (
     <group
       ref={group}
+      scale={[1.2, 1.2, 1.2]} // overscale to avoid visible box
       onPointerMove={(e) => {
         setHovering(true);
         onPointerMove(e);
       }}
       onPointerLeave={() => setHovering(false)}
     >
+      {/* Particles */}
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -187,12 +193,14 @@ function ParticleNetwork({
           size={0.06}
           vertexColors
           transparent
-          opacity={0.98}
+          opacity={0.9}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
+          sizeAttenuation
         />
       </points>
 
+      {/* Connecting Lines */}
       <lineSegments ref={linesRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -200,12 +208,13 @@ function ParticleNetwork({
             array={linePositions}
             count={linePositions.length / 3}
             itemSize={3}
+            usage={THREE.DynamicDrawUsage} // 👈 allows runtime updates
           />
         </bufferGeometry>
         <lineBasicMaterial
           color="#7dd3fc"
           transparent
-          opacity={0.3}
+          opacity={0.25}
         />
       </lineSegments>
     </group>
@@ -214,10 +223,10 @@ function ParticleNetwork({
 
 export default function AIMLParticleNetwork() {
   return (
-    <div className="relative w-100 h-100 md:w-100 md:h-100"> {/* Larger, responsive container */}
+    <div className="relative w-full h-[600px] md:h-[700px]">
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 0, 14], fov: 50 }}
+        camera={{ position: [0, 0, 20], fov: 65 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
       >
@@ -226,18 +235,13 @@ export default function AIMLParticleNetwork() {
         <pointLight position={[-12, -12, -12]} intensity={0.8} />
         <pointLight position={[0, 12, -12]} intensity={0.6} color="#8b5cf6" />
 
-        <ParticleNetwork
-          count={280}
-          radius={7.5}
-          linkDistance={1.45}
-          maxLinksPerNode={7}
-        />
+        <ParticleNetwork />
 
         <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.3}
+          autoRotateSpeed={0.25}
         />
       </Canvas>
     </div>
