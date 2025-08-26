@@ -348,7 +348,7 @@ const Portfolio = () => {
             {/* Left Side - Particle */}
             <motion.div
               className="col-span-12 md:col-span-5 flex justify-center md:justify-start"
-              initial={{ opacity: 0, x: -100, rotateY: -500 }}
+              initial={{ opacity: 0, x: -50, rotateY: -150 }}
               animate={{ opacity: 1, x: -120, rotateY: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
             >
