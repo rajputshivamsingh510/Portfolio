@@ -26,19 +26,19 @@ function useMouseAttractor() {
 }
 
 function ParticleNetwork({
-  count = 200,
-  radius = 6,
-  linkDistance = 1.25,
-  maxLinksPerNode = 6,
+  count = 250,
+  radius = 7,
+  linkDistance = 1.4,
+  maxLinksPerNode = 7,
 }: NetworkProps) {
   const group = useRef(null);
   const pointsRef = useRef(null);
   const linesRef = useRef(null);
   const velocities = useRef(
     Array.from({ length: count }, () => new THREE.Vector3(
-      (Math.random() - 0.5) * 0.0025,
-      (Math.random() - 0.5) * 0.0025,
-      (Math.random() - 0.5) * 0.0025
+      (Math.random() - 0.5) * 0.003,
+      (Math.random() - 0.5) * 0.003,
+      (Math.random() - 0.5) * 0.003
     ))
   );
   const { mouse3, onPointerMove } = useMouseAttractor();
@@ -50,6 +50,7 @@ function ParticleNetwork({
     const col = new Float32Array(count * 3);
     const colorA = new THREE.Color("#60a5fa");
     const colorB = new THREE.Color("#22d3ee");
+    const colorC = new THREE.Color("#8b5cf6");
     
     for (let i = 0; i < count; i++) {
       const u = Math.random();
@@ -63,7 +64,12 @@ function ParticleNetwork({
       pos[i * 3 + 2] = r * Math.cos(phi);
 
       const t = i / count;
-      const c = colorA.clone().lerp(colorB, t);
+      let c;
+      if (t < 0.5) {
+        c = colorA.clone().lerp(colorB, t * 2);
+      } else {
+        c = colorB.clone().lerp(colorC, (t - 0.5) * 2);
+      }
       col[i * 3] = c.r;
       col[i * 3 + 1] = c.g;
       col[i * 3 + 2] = c.b;
@@ -82,9 +88,10 @@ function ParticleNetwork({
     const pts = pointsRef.current.geometry.attributes.position;
     const arr = pts.array;
 
-    // Gentle auto-rotation
-    group.current.rotation.y += delta * 0.1;
-    group.current.rotation.x += delta * 0.02;
+    // Gentle auto-rotation with slight variation
+    group.current.rotation.y += delta * 0.12;
+    group.current.rotation.x += delta * 0.025;
+    group.current.rotation.z += delta * 0.01;
 
     // Particle motion
     for (let i = 0; i < count; i++) {
@@ -96,17 +103,17 @@ function ParticleNetwork({
         const dir = mouse3.current.clone().sub(p);
         const dist = Math.max(dir.length(), 0.0001);
         dir.normalize();
-        const force = Math.min(0.0025 / (dist * dist), 0.0025);
+        const force = Math.min(0.003 / (dist * dist), 0.003);
         v.addScaledVector(dir, force);
       }
 
-      v.multiplyScalar(0.985);
+      v.multiplyScalar(0.988);
       p.add(v);
 
-      const limit = radius * 1.15;
+      const limit = radius * 1.2;
       if (p.length() > limit) {
         p.setLength(limit);
-        v.reflect(p.clone().normalize()).multiplyScalar(0.7);
+        v.reflect(p.clone().normalize()).multiplyScalar(0.75);
       }
 
       arr[i3] = p.x;
@@ -177,10 +184,10 @@ function ParticleNetwork({
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.05}
+          size={0.06}
           vertexColors
           transparent
-          opacity={0.95}
+          opacity={0.98}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
@@ -198,7 +205,7 @@ function ParticleNetwork({
         <lineBasicMaterial
           color="#7dd3fc"
           transparent
-          opacity={0.25}
+          opacity={0.3}
         />
       </lineSegments>
     </group>
@@ -207,29 +214,30 @@ function ParticleNetwork({
 
 export default function AIMLParticleNetwork() {
   return (
-    <div className="relative w-64 h-64"> {/* Smaller, transparent container */}
+    <div className="relative w-90 h-80 md:w-96 md:h-96"> {/* Larger, responsive container */}
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [0, 0, 12], fov: 55 }}
-        gl={{ antialias: true, alpha: true }} // ✅ alpha makes background transparent
-        style={{ background: "transparent" }} // ✅ ensures no background
+        camera={{ position: [0, 0, 14], fov: 50 }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[10, 10, 10]} intensity={1.2} />
-        <pointLight position={[-10, -10, -10]} intensity={0.6} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[12, 12, 12]} intensity={1.4} />
+        <pointLight position={[-12, -12, -12]} intensity={0.8} />
+        <pointLight position={[0, 12, -12]} intensity={0.6} color="#8b5cf6" />
 
         <ParticleNetwork
-          count={220}
-          radius={6.5}
-          linkDistance={1.35}
-          maxLinksPerNode={6}
+          count={280}
+          radius={7.5}
+          linkDistance={1.45}
+          maxLinksPerNode={7}
         />
 
         <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.25}
+          autoRotateSpeed={0.3}
         />
       </Canvas>
     </div>
