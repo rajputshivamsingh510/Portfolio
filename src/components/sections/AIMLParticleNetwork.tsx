@@ -207,25 +207,31 @@ function ParticleNetwork({
 
 export default function AIMLParticleNetwork() {
   return (
-    <div className="relative w-full h-[420px] md:h-[520px] lg:h-[600px] rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(56,189,248,0.12),transparent_60%)]" />
+    <div className="relative w-64 h-64"> {/* Smaller, transparent container */}
       <Canvas
         dpr={[1, 2]}
         camera={{ position: [0, 0, 12], fov: 55 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true }} // ✅ alpha makes background transparent
+        style={{ background: "transparent" }} // ✅ ensures no background
       >
         <ambientLight intensity={0.4} />
         <pointLight position={[10, 10, 10]} intensity={1.2} />
         <pointLight position={[-10, -10, -10]} intensity={0.6} />
 
-        <ParticleNetwork count={220} radius={6.5} linkDistance={1.35} maxLinksPerNode={6} />
+        <ParticleNetwork
+          count={220}
+          radius={6.5}
+          linkDistance={1.35}
+          maxLinksPerNode={6}
+        />
 
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.25} />
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          autoRotate
+          autoRotateSpeed={0.25}
+        />
       </Canvas>
-
-      <div className="pointer-events-none absolute bottom-4 left-4 text-cyan-200/80 text-xs tracking-widest">
-        AI/ML Particle Network
-      </div>
     </div>
   );
 }
