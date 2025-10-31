@@ -1083,16 +1083,16 @@ const Portfolio = () => {
   const ExperienceSection = () => {
     const experiences = [
       {
-        title: 'AI/ML Developer Intern',
-        company: 'Scoreazy (Remote)',
-        period: '2025',
-        description: 'Built automation tools like LinkedIn Profile Outreach and YouTube Transcript Extractor using Python and Selenium.',
+        title: 'AI/ML Trainee',
+        company: 'Wabric(Remote)',
+        period: '09/2025-Present',
+        description: 'In the traineeship I developed and integrated RESTful APIs and applied machine learning models to real-world projects. I built API endpoints, connected external APIs, and deployed predictive models using Python, strengthening my skills in software development, data handling, and AI-driven systems.',
         icon: '🤖'
       },
       {
         title: 'Data Science Intern',
-        company: 'SmartBank (Lloyds Banking Group)',
-        period: '2025',
+        company: '(Lloyds Banking Group)',
+        period: '03/2025-05/2025',
         description: 'Worked on customer churn prediction: data collection, EDA, preprocessing, and predictive modeling using ML.',
         icon: '📊'
       },
