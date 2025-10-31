@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { FiBriefcase } from 'react-icons/fi'
 
 const items: Experience[] = [
-  { company: 'SmartBank', role: 'Data Scientist (Project)', period: '2025', bullets: ['Customer churn prediction','Feature engineering & model monitoring'] },
-  { company: 'Akridata (Internship)', role: 'ML Intern (Remote)', period: '2025', bullets: ['Vision/NLP tasks','Fast prototyping & reporting'] }
+  { company: 'SmartBank', role: 'Data Scientist (Project)', period: '03/2025-05/2025', bullets: ['Customer churn prediction','Feature engineering & model monitoring'] },
+  { company: 'Akridata (Internship)', role: 'AI/ML Intern (Remote)', period: '09/2025-Present', bullets: ['Vision/NLP tasks','Fast prototyping & reporting'] }
 ]
 
 export default function ExperienceSection() {
