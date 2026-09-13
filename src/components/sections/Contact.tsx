@@ -74,20 +74,20 @@ export default function Contact() {
             <div className="space-y-3.5">
               <a
                 href="mailto:rajputshivamsingh510@gmail.com"
-                className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-white dark:from-zinc-900/80 dark:to-[#121520] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 text-zinc-700 dark:text-zinc-300 transition-all group"
+                className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-white dark:bg-gradient-to-r dark:from-zinc-900/90 dark:to-[#121520] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 dark:hover:from-zinc-850 dark:hover:to-[#181c2c] text-zinc-700 dark:text-zinc-300 transition-all group"
               >
                 <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-zinc-800 text-indigo-600 dark:text-zinc-200 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-violet-600 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-colors">
                   <Mail size={16} />
                 </div>
                 <div className="truncate">
                   <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 block font-semibold">Direct Email</span>
-                  <span className="text-xs font-mono text-zinc-900 dark:text-zinc-100 font-semibold truncate group-hover:text-indigo-600 transition-colors">
+                  <span className="text-xs font-mono text-zinc-900 dark:text-zinc-100 font-semibold truncate group-hover:text-indigo-600 dark:group-hover:text-white transition-colors">
                     rajputshivamsingh510@gmail.com
                   </span>
                 </div>
               </a>
 
-              <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-white dark:from-zinc-900/80 dark:to-[#121520] border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
+              <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-white dark:bg-gradient-to-r dark:from-zinc-900/90 dark:to-[#121520] border border-slate-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                 <div className="p-2.5 rounded-xl bg-indigo-50 dark:bg-zinc-800 text-indigo-600 dark:text-zinc-200">
                   <MapPin size={16} />
                 </div>
@@ -106,9 +106,9 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/shivam-singh-243000232/"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 py-2.5 rounded-xl bg-white dark:from-zinc-900 dark:to-[#111420] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 text-zinc-700 hover:text-indigo-700 dark:text-zinc-300 dark:hover:text-white flex items-center justify-center space-x-2 text-xs font-mono transition-all shadow-xs font-semibold"
+                  className="flex-1 py-2.5 rounded-xl bg-white dark:bg-gradient-to-r dark:from-zinc-900 dark:to-[#111420] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 dark:hover:from-zinc-800 dark:hover:to-[#181c2c] text-zinc-700 hover:text-indigo-700 dark:text-zinc-100 dark:hover:text-white flex items-center justify-center space-x-2 text-xs font-mono transition-all shadow-xs font-semibold group"
                 >
-                  <Linkedin size={15} className="text-indigo-600 dark:text-zinc-300" />
+                  <Linkedin size={15} className="text-indigo-600 dark:text-zinc-300 group-hover:text-indigo-700 dark:group-hover:text-white transition-colors" />
                   <span>LinkedIn</span>
                 </a>
 
@@ -116,9 +116,9 @@ export default function Contact() {
                   href="https://github.com/rajputshivamsingh510"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 py-2.5 rounded-xl bg-white dark:from-zinc-900 dark:to-[#111420] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 text-zinc-700 hover:text-indigo-700 dark:text-zinc-300 dark:hover:text-white flex items-center justify-center space-x-2 text-xs font-mono transition-all shadow-xs font-semibold"
+                  className="flex-1 py-2.5 rounded-xl bg-white dark:bg-gradient-to-r dark:from-zinc-900 dark:to-[#111420] border border-slate-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-zinc-600 hover:bg-indigo-50/50 dark:hover:from-zinc-800 dark:hover:to-[#181c2c] text-zinc-700 hover:text-indigo-700 dark:text-zinc-100 dark:hover:text-white flex items-center justify-center space-x-2 text-xs font-mono transition-all shadow-xs font-semibold group"
                 >
-                  <Github size={15} className="text-indigo-600 dark:text-zinc-300" />
+                  <Github size={15} className="text-indigo-600 dark:text-zinc-300 group-hover:text-indigo-700 dark:group-hover:text-white transition-colors" />
                   <span>GitHub</span>
                 </a>
               </div>
