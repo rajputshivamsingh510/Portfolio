@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
+// Set VITE_API_URL in your .env file (and in Vercel's Environment Variables)
+// e.g. VITE_API_URL=https://your-backend.onrender.com
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export default function Contact() {
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus(null);
@@ -18,21 +22,37 @@ export default function Contact() {
     const message = String(data.get('message') || '');
 
     if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || message.length < 8) {
-      setTimeout(() => {
-        setStatus({ type: 'error', message: 'Please enter a valid name, email address, and message.' });
-        setIsSubmitting(false);
-      }, 300);
+      setStatus({ type: 'error', message: 'Please enter a valid name, email address, and message.' });
+      setIsSubmitting(false);
       return;
     }
 
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/send-message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message. Please try again.');
+      }
+
       setStatus({
         type: 'success',
         message: 'Thank you! Your message has been sent. Shivam will respond shortly.'
       });
-      setIsSubmitting(false);
       form.reset();
-    }, 500);
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Something went wrong. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
