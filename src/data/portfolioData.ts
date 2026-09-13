@@ -87,20 +87,6 @@ export const experiences: ExperienceItem[] = [
       'Formulated actionable recommendations for data-driven strategic planning.'
     ],
     tech: ['Python', 'Pandas', 'Matplotlib', 'Customer Analytics', 'Machine Learning']
-  },
-  {
-    company: 'Edunet Foundation',
-    role: 'AI & Data Science Trainee',
-    period: '2024',
-    location: 'India',
-    type: 'Professional Training',
-    description: 'Completed rigorous hands-on training covering core Data Science methodology, statistical analysis, and deep learning neural architectures.',
-    bullets: [
-      'Implemented Supervised and Unsupervised machine learning models on real-world datasets.',
-      'Optimized neural network hyperparameters to prevent overfitting and improve generalization.',
-      'Built interactive data visualization dashboards for business decision support.'
-    ],
-    tech: ['Python', 'NumPy', 'Scikit-Learn', 'TensorFlow', 'SQL']
   }
 ];
 
